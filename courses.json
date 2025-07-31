@@ -1,0 +1,68 @@
+[
+  {
+    "title": "Optimise Interviews UK",
+    "description": "Master your interview skills with expert coaching.",
+    "country": "UK",
+    "category": "Interview",
+    "priceTier": "mid",
+    "startPrice": 150,
+    "logoURL": "https://yourcdn.com/logos/optimiseinterviews.png",
+    "pageLink": "/courses/optimise-interviews",
+    "subTabs": ["Mock Interviews", "1-on-1 Coaching", "Feedback Reports"]
+  },
+  {
+    "title": "Medical Coaching Germany",
+    "description": "Comprehensive preparation for medical exams and interviews.",
+    "country": "Germany",
+    "category": "Medical",
+    "priceTier": "high",
+    "startPrice": 450,
+    "logoURL": "https://yourcdn.com/logos/medicalcoaching.png",
+    "pageLink": "/courses/medical-coaching",
+    "subTabs": ["Theory Modules", "Practical Workshops", "Exam Simulations"]
+  },
+  {
+    "title": "CV Perfection France",
+    "description": "Professional CV writing and optimization service.",
+    "country": "France",
+    "category": "CV",
+    "priceTier": "low",
+    "startPrice": 75,
+    "logoURL": "https://yourcdn.com/logos/cvperfection.png",
+    "pageLink": "/courses/cv-perfection",
+    "subTabs": ["CV Templates", "1-on-1 Editing", "ATS Optimization"]
+  },
+  {
+    "title": "Corporate Skills UK",
+    "description": "Develop essential corporate soft skills for career advancement.",
+    "country": "UK",
+    "category": "Corporate",
+    "priceTier": "mid",
+    "startPrice": 200,
+    "logoURL": "https://yourcdn.com/logos/corporateskills.png",
+    "pageLink": "/courses/corporate-skills",
+    "subTabs": ["Leadership", "Communication", "Conflict Resolution"]
+  },
+  {
+    "title": "IT Certification Bootcamp Germany",
+    "description": "Intensive IT training and certification prep courses.",
+    "country": "Germany",
+    "category": "IT",
+    "priceTier": "high",
+    "startPrice": 500,
+    "logoURL": "https://yourcdn.com/logos/itbootcamp.png",
+    "pageLink": "/courses/it-certification",
+    "subTabs": ["Networking", "Cloud Computing", "Security Fundamentals"]
+  },
+  {
+    "title": "Language Mastery France",
+    "description": "Accelerated language courses for professionals.",
+    "country": "France",
+    "category": "Language",
+    "priceTier": "mid",
+    "startPrice": 250,
+    "logoURL": "https://yourcdn.com/logos/languagemastery.png",
+    "pageLink": "/courses/language-mastery",
+    "subTabs": ["Speaking Workshops", "Grammar Clinics", "Cultural Immersion"]
+  }
+]
