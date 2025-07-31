@@ -42,17 +42,5 @@
     "logoURL": "https://eurolynk.org/logos/linkedinboost.png",
     "pageLink": "https://provider-site.com/linkedin-tactics",
     "subTabs": ["Profile Review", "Networking Strategy"]
-  },
-  {
-    "title": "Recognition of Foreign Degrees",
-    "description": "Assistance with degree recognition in EU countries.",
-    "country": "Italy",
-    "category": "Legal Paperwork",
-    "priceTier": "high",
-    "startPrice": 400,
-    "logoURL": "https://eurolynk.org/logos/degreeequivalency.png",
-    "pageLink": "https://provider-site.com/degree-recognition",
-    "subTabs": ["Document Translation", "Legal Assistance"]
   }
-  // ... repeat similarly until 50 total items, varying country, category, prices
 ]
