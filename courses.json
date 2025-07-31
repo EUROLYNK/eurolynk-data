@@ -1,4 +1,16 @@
 [
+  {
+    "id": "irc-gmbh-application-coaching",
+    "title": "Application Coaching & Interview Training - Germany (IRC GmbH)",
+    "country": "Germany",
+    "category": "Interview",
+    "startPrice": 150,
+    "priceTier": "mid",
+    "logoURL": "https://www.ircgmbh.de/favicon.ico",
+    "description": "Interview training and application document optimization by IRC career experts.",
+    "pageLink": "https://www.ircgmbh.de/en/applicants/application-coaching-and-application-training/",
+    "providerSlug": "irc-gmbh",
+    "subCourses": [
       {
         "title": "CV & Cover Letter Optimization",
         "description": "One‑on‑one optimization of resume, cover letter and application documents.",
