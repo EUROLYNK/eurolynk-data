@@ -109,5 +109,117 @@
     "subTabs": ["Business German", "Interview Preparation", "Writing Skills"],
     "pageLink": "https://www.goethe.de/en/spr/ueb/int.html"
   }
+[
+  {
+    "title": "EURES",
+    "country": "EU-Wide",
+    "category": "Job Matching",
+    "priceTier": "low",
+    "startPrice": "0",
+    "logoURL": "https://ec.europa.eu/eures/images/eures-logo.png",
+    "description": "European network offering job-matching services and paperwork support across EU.",
+    "subTabs": ["Job Matching", "Paperwork Assistance", "Relocation"],
+    "pageLink": "https://ec.europa.eu/eures/"
+  },
+  {
+    "title": "Make it in Germany",
+    "country": "Germany",
+    "category": "Visa Support",
+    "priceTier": "low",
+    "startPrice": "0",
+    "logoURL": "https://www.make-it-in-germany.com/fileadmin/_processed_/c/d/csm_miig_logo_e2e6d54a46.png",
+    "description": "Official portal offering job search assistance and visa coaching for Germany.",
+    "subTabs": ["Visa Assistance", "Job Portal", "Relocation Guide"],
+    "pageLink": "https://www.make-it-in-germany.com/en/"
+  },
+  {
+    "title": "Pôle emploi",
+    "country": "France",
+    "category": "Job Coaching",
+    "priceTier": "low",
+    "startPrice": "0",
+    "logoURL": "https://www.pole-emploi.fr/medias/pe-logo.png",
+    "description": "France's employment agency providing international job opportunities and support.",
+    "subTabs": ["International Jobs", "CV Workshops", "Application Help"],
+    "pageLink": "https://www.pole-emploi.fr/international/"
+  },
+  {
+    "title": "SEPE",
+    "country": "Spain",
+    "category": "Job Services",
+    "priceTier": "low",
+    "startPrice": "0",
+    "logoURL": "https://www.sepe.es/SiteSepe/contenidos/images/logoSEPE.png",
+    "description": "Spanish employment service offering EU job courses and documentation assistance.",
+    "subTabs": ["Job Courses", "Paperwork", "Relocation"],
+    "pageLink": "https://www.sepe.es/"
+  },
+  {
+    "title": "CLICLavoro",
+    "country": "Italy",
+    "category": "CV Services",
+    "priceTier": "low",
+    "startPrice": "0",
+    "logoURL": "https://www.cliclavoro.gov.it/images/logo.png",
+    "description": "Italy's job platform helping with CV tools and EU-wide job connections.",
+    "subTabs": ["CV Tools", "Job Board", "International Mobility"],
+    "pageLink": "https://www.cliclavoro.gov.it/"
+  },
+  {
+    "title": "HealthStaff EU",
+    "country": "EU-Wide",
+    "category": "Medical",
+    "priceTier": "mid",
+    "startPrice": "200",
+    "logoURL": "https://healthstaff.eu/wp-content/uploads/2020/06/logo-healthstaff.png",
+    "description": "Medical job integration coaching for EU healthcare professionals.",
+    "subTabs": ["Medical Licensing", "Interview Prep", "Relocation Support"],
+    "pageLink": "https://healthstaff.eu"
+  },
+  {
+    "title": "IT Job Booster",
+    "country": "Germany",
+    "category": "IT",
+    "priceTier": "high",
+    "startPrice": "500",
+    "logoURL": "https://itjobbooster.de/assets/logo.png",
+    "description": "German IT coaching for EU professionals entering the tech job market.",
+    "subTabs": ["CV Optimization", "Technical Interview Coaching", "Work Permit Support"],
+    "pageLink": "https://itjobbooster.de"
+  },
+  {
+    "title": "Expat Language Coaching",
+    "country": "France",
+    "category": "Language",
+    "priceTier": "mid",
+    "startPrice": "150",
+    "logoURL": "https://expatlangcoach.fr/logo.png",
+    "description": "Language coaching services tailored for expats integrating into EU jobs.",
+    "subTabs": ["Language Courses", "Cultural Training", "CV Translation"],
+    "pageLink": "https://expatlangcoach.fr"
+  },
+  {
+    "title": "CV Pro Experts",
+    "country": "Spain",
+    "category": "CV",
+    "priceTier": "mid",
+    "startPrice": "100",
+    "logoURL": "https://cvproexperts.es/images/logo.png",
+    "description": "Expert CV writing and optimization for EU job seekers.",
+    "subTabs": ["CV Writing", "Cover Letter", "LinkedIn Profiles"],
+    "pageLink": "https://cvproexperts.es"
+  },
+  {
+    "title": "Global Mobility Partners",
+    "country": "EU-Wide",
+    "category": "Visa Support",
+    "priceTier": "high",
+    "startPrice": "400",
+    "logoURL": "https://globalmobilitypartners.eu/wp-content/uploads/2021/03/gmp-logo.png",
+    "description": "Visa, relocation, and job documentation support across EU countries.",
+    "subTabs": ["Visa Paperwork", "Relocation Coaching", "Job Integration"],
+    "pageLink": "https://globalmobilitypartners.eu"
+  }
 ]
+
 
