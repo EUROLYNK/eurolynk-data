@@ -1,224 +1,58 @@
 [
   {
-    "title": "Optimise Interviews UK",
-    "logoURL": "https://www.optimiseinterviews.com/wp-content/uploads/2021/06/Optimise-Interviews-Logo.png",
-    "description": "Specialized mock interviews and coaching for UK job seekers.",
-    "country": "UK",
-    "category": "Interview",
-    "startPrice": 150,
-    "priceTier": "mid",
-    "subTabs": ["Mock Interviews", "Behavioral Coaching", "Executive Interviews"],
-    "pageLink": "https://www.optimiseinterviews.com/"
-  },
-  {
-    "title": "TopCV Resume Services",
-    "logoURL": "https://www.topcv.com/static/images/TopCV_Logo.png",
-    "description": "Professional CV writing and LinkedIn profile optimization.",
-    "country": "UK",
-    "category": "CV",
-    "startPrice": 90,
-    "priceTier": "low",
-    "subTabs": ["CV Review", "LinkedIn Optimization", "Cover Letter Writing"],
-    "pageLink": "https://www.topcv.com/"
-  },
-  {
-    "title": "PLABable Medical UK",
-    "logoURL": "https://plabable.com/assets/images/logo/plabable-logo.png",
-    "description": "Online PLAB 1 & 2 courses with practice questions and mock exams.",
-    "country": "UK",
-    "category": "Medical",
-    "startPrice": 120,
-    "priceTier": "mid",
-    "subTabs": ["PLAB 1 Course", "PLAB 2 Course", "Mock Exams"],
-    "pageLink": "https://plabable.com/"
-  },
-  {
-    "title": "Udemy Web Development Bootcamp",
-    "logoURL": "https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg",
-    "description": "Full-stack web development bootcamp covering HTML, CSS, JS & more.",
-    "country": "Global",
-    "category": "IT",
-    "startPrice": 20,
-    "priceTier": "low",
-    "subTabs": ["HTML & CSS", "JavaScript", "Node.js"],
-    "pageLink": "https://www.udemy.com/course/the-web-developer-bootcamp/"
-  },
-  {
-    "title": "German Approbation Coaching",
-    "logoURL": "https://www.medical-club.de/wp-content/uploads/2020/10/logo.png",
-    "description": "Preparation courses for medical licensing exams in Germany.",
+    "title": "CV Optimization Workshop",
+    "description": "Improve your CV to meet EU job standards.",
     "country": "Germany",
-    "category": "Medical",
-    "startPrice": 300,
-    "priceTier": "high",
-    "subTabs": ["Medical Language Course", "Exam Simulation", "Document Preparation"],
-    "pageLink": "https://www.medical-club.de/"
-  },
-  {
-    "title": "LinkedIn Learning - Leadership Essentials",
-    "logoURL": "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
-    "description": "Build leadership and management skills for corporate environments.",
-    "country": "Global",
-    "category": "Corporate",
-    "startPrice": 40,
+    "category": "Career Coaching",
     "priceTier": "low",
-    "subTabs": ["Leadership Skills", "Emotional Intelligence", "Conflict Management"],
-    "pageLink": "https://www.linkedin.com/learning/paths/develop-your-leadership-skills"
-  },
-  {
-    "title": "Coursera - Business English for Non-Native Speakers",
-    "logoURL": "https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/favicon-v2.png",
-    "description": "Improve your professional English communication skills.",
-    "country": "Global",
-    "category": "Language",
     "startPrice": 50,
-    "priceTier": "low",
-    "subTabs": ["Business Writing", "Presentation Skills", "Email Etiquette"],
-    "pageLink": "https://www.coursera.org/specializations/business-english"
+    "logoURL": "https://eurolynk.org/logos/cvworkshop.png",
+    "pageLink": "https://provider-site.com/cv-workshop",
+    "subTabs": ["Resume Building", "Job Portal Optimization"]
   },
   {
-    "title": "Coding Dojo - Data Science Bootcamp",
-    "logoURL": "https://www.codingdojo.com/assets/images/logo-color.svg",
-    "description": "Intensive bootcamp covering data science, Python, and machine learning.",
-    "country": "Global",
-    "category": "IT",
-    "startPrice": 2500,
-    "priceTier": "high",
-    "subTabs": ["Python", "Machine Learning", "Data Visualization"],
-    "pageLink": "https://www.codingdojo.com/data-science"
+    "title": "EU Work Visa Support",
+    "description": "Guided assistance for EU work visa applications.",
+    "country": "Netherlands",
+    "category": "Legal Paperwork",
+    "priceTier": "mid",
+    "startPrice": 200,
+    "logoURL": "https://eurolynk.org/logos/visasupport.png",
+    "pageLink": "https://provider-site.com/eu-visa-help",
+    "subTabs": ["Visa Paperwork", "Appointment Booking"]
   },
   {
-    "title": "AFPA Certified Nutritionist Program",
-    "logoURL": "https://www.afpafitness.com/hubfs/AFPA-Logo-Stacked.png",
-    "description": "Become a certified nutrition and wellness consultant.",
-    "country": "Global",
-    "category": "Medical",
-    "startPrice": 899,
-    "priceTier": "high",
-    "subTabs": ["Nutrition Science", "Client Coaching", "Meal Planning"],
-    "pageLink": "https://www.afpafitness.com/programs/certified-nutrition-and-wellness-consultant"
-  },
-  {
-    "title": "Goethe Institute - German for Professionals",
-    "logoURL": "https://www.goethe.de/resources/files/images/goethe-institut-logo.svg",
-    "description": "German language courses tailored for workplace communication.",
-    "country": "Germany",
-    "category": "Language",
-    "startPrice": 500,
-    "priceTier": "high",
-    "subTabs": ["Business German", "Interview Preparation", "Writing Skills"],
-    "pageLink": "https://www.goethe.de/en/spr/ueb/int.html"
-  }
-  {
-    "title": "EURES",
-    "country": "EU-Wide",
-    "category": "Job Matching",
-    "priceTier": "low",
-    "startPrice": "0",
-    "logoURL": "https://ec.europa.eu/eures/images/eures-logo.png",
-    "description": "European network offering job-matching services and paperwork support across EU.",
-    "subTabs": ["Job Matching", "Paperwork Assistance", "Relocation"],
-    "pageLink": "https://ec.europa.eu/eures/"
-  },
-  {
-    "title": "Make it in Germany",
-    "country": "Germany",
-    "category": "Visa Support",
-    "priceTier": "low",
-    "startPrice": "0",
-    "logoURL": "https://www.make-it-in-germany.com/fileadmin/_processed_/c/d/csm_miig_logo_e2e6d54a46.png",
-    "description": "Official portal offering job search assistance and visa coaching for Germany.",
-    "subTabs": ["Visa Assistance", "Job Portal", "Relocation Guide"],
-    "pageLink": "https://www.make-it-in-germany.com/en/"
-  },
-  {
-    "title": "Pôle emploi",
+    "title": "Interview Skills Coaching",
+    "description": "Master interviews in European job markets.",
     "country": "France",
-    "category": "Job Coaching",
-    "priceTier": "low",
-    "startPrice": "0",
-    "logoURL": "https://www.pole-emploi.fr/medias/pe-logo.png",
-    "description": "France's employment agency providing international job opportunities and support.",
-    "subTabs": ["International Jobs", "CV Workshops", "Application Help"],
-    "pageLink": "https://www.pole-emploi.fr/international/"
+    "category": "Career Coaching",
+    "priceTier": "mid",
+    "startPrice": 150,
+    "logoURL": "https://eurolynk.org/logos/interviewcoaching.png",
+    "pageLink": "https://provider-site.com/interview-coach",
+    "subTabs": ["Mock Interviews", "Behavioral Training"]
   },
   {
-    "title": "SEPE",
-    "country": "Spain",
-    "category": "Job Services",
+    "title": "LinkedIn Job Search Tactics",
+    "description": "Enhance your LinkedIn profile for recruiters.",
+    "country": "Belgium",
+    "category": "Digital Presence",
     "priceTier": "low",
-    "startPrice": "0",
-    "logoURL": "https://www.sepe.es/SiteSepe/contenidos/images/logoSEPE.png",
-    "description": "Spanish employment service offering EU job courses and documentation assistance.",
-    "subTabs": ["Job Courses", "Paperwork", "Relocation"],
-    "pageLink": "https://www.sepe.es/"
+    "startPrice": 75,
+    "logoURL": "https://eurolynk.org/logos/linkedinboost.png",
+    "pageLink": "https://provider-site.com/linkedin-tactics",
+    "subTabs": ["Profile Review", "Networking Strategy"]
   },
   {
-    "title": "CLICLavoro",
+    "title": "Recognition of Foreign Degrees",
+    "description": "Assistance with degree recognition in EU countries.",
     "country": "Italy",
-    "category": "CV Services",
-    "priceTier": "low",
-    "startPrice": "0",
-    "logoURL": "https://www.cliclavoro.gov.it/images/logo.png",
-    "description": "Italy's job platform helping with CV tools and EU-wide job connections.",
-    "subTabs": ["CV Tools", "Job Board", "International Mobility"],
-    "pageLink": "https://www.cliclavoro.gov.it/"
-  },
-  {
-    "title": "HealthStaff EU",
-    "country": "EU-Wide",
-    "category": "Medical",
-    "priceTier": "mid",
-    "startPrice": "200",
-    "logoURL": "https://healthstaff.eu/wp-content/uploads/2020/06/logo-healthstaff.png",
-    "description": "Medical job integration coaching for EU healthcare professionals.",
-    "subTabs": ["Medical Licensing", "Interview Prep", "Relocation Support"],
-    "pageLink": "https://healthstaff.eu"
-  },
-  {
-    "title": "IT Job Booster",
-    "country": "Germany",
-    "category": "IT",
+    "category": "Legal Paperwork",
     "priceTier": "high",
-    "startPrice": "500",
-    "logoURL": "https://itjobbooster.de/assets/logo.png",
-    "description": "German IT coaching for EU professionals entering the tech job market.",
-    "subTabs": ["CV Optimization", "Technical Interview Coaching", "Work Permit Support"],
-    "pageLink": "https://itjobbooster.de"
-  },
-  {
-    "title": "Expat Language Coaching",
-    "country": "France",
-    "category": "Language",
-    "priceTier": "mid",
-    "startPrice": "150",
-    "logoURL": "https://expatlangcoach.fr/logo.png",
-    "description": "Language coaching services tailored for expats integrating into EU jobs.",
-    "subTabs": ["Language Courses", "Cultural Training", "CV Translation"],
-    "pageLink": "https://expatlangcoach.fr"
-  },
-  {
-    "title": "CV Pro Experts",
-    "country": "Spain",
-    "category": "CV",
-    "priceTier": "mid",
-    "startPrice": "100",
-    "logoURL": "https://cvproexperts.es/images/logo.png",
-    "description": "Expert CV writing and optimization for EU job seekers.",
-    "subTabs": ["CV Writing", "Cover Letter", "LinkedIn Profiles"],
-    "pageLink": "https://cvproexperts.es"
-  },
-  {
-    "title": "Global Mobility Partners",
-    "country": "EU-Wide",
-    "category": "Visa Support",
-    "priceTier": "high",
-    "startPrice": "400",
-    "logoURL": "https://globalmobilitypartners.eu/wp-content/uploads/2021/03/gmp-logo.png",
-    "description": "Visa, relocation, and job documentation support across EU countries.",
-    "subTabs": ["Visa Paperwork", "Relocation Coaching", "Job Integration"],
-    "pageLink": "https://globalmobilitypartners.eu"
+    "startPrice": 400,
+    "logoURL": "https://eurolynk.org/logos/degreeequivalency.png",
+    "pageLink": "https://provider-site.com/degree-recognition",
+    "subTabs": ["Document Translation", "Legal Assistance"]
   }
+  // ... repeat similarly until 50 total items, varying country, category, prices
 ]
-
-
