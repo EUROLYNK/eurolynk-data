@@ -1,58 +1,112 @@
 [
+      {
+        "title": "CV & Cover Letter Optimization",
+        "description": "One‑on‑one optimization of resume, cover letter and application documents.",
+        "price": "€150",
+        "link": "https://www.ircgmbh.de/en/applicants/application-coaching-and-application-training/"
+      },
+      {
+        "title": "Applicant & Interview Coaching",
+        "description": "Mock interview simulation and personal presentation practice.",
+        "price": "€150",
+        "link": "https://www.ircgmbh.de/en/applicants/application-coaching-and-application-training/"
+      },
+      {
+        "title": "Career Counseling & Job Search Support",
+        "description": "Strengths analysis, career plan development, job search mentoring.",
+        "price": "€250",
+        "link": "https://www.ircgmbh.de/en/applicants/application-coaching-and-application-training/"
+      }
+    ]
+  },
   {
-    "title": "CV Optimization Workshop",
-    "description": "Improve your CV to meet EU job standards.",
+    "id": "lift-coaching-cv-linkedin",
+    "title": "CV & LinkedIn Coaching Packages - Germany (Lift Coaching)",
     "country": "Germany",
-    "category": "Career Coaching",
-    "priceTier": "low",
-    "startPrice": 50,
-    "logoURL": "https://eurolynk.org/logos/cvworkshop.png",
-    "pageLink": "https://provider-site.com/cv-workshop",
-    "subTabs": ["Resume Building", "Job Portal Optimization"]
-  },
-  {
-    "title": "EU Work Visa Support",
-    "description": "Guided assistance for EU work visa applications.",
-    "country": "Netherlands",
-    "category": "Legal Paperwork",
-    "priceTier": "mid",
-    "startPrice": 200,
-    "logoURL": "https://eurolynk.org/logos/visasupport.png",
-    "pageLink": "https://provider-site.com/eu-visa-help",
-    "subTabs": ["Visa Paperwork", "Appointment Booking"]
-  },
-  {
-    "title": "Interview Skills Coaching",
-    "description": "Master interviews in European job markets.",
-    "country": "France",
-    "category": "Career Coaching",
-    "priceTier": "mid",
+    "category": "CV",
     "startPrice": 150,
-    "logoURL": "https://eurolynk.org/logos/interviewcoaching.png",
-    "pageLink": "https://provider-site.com/interview-coach",
-    "subTabs": ["Mock Interviews", "Behavioral Training"]
+    "priceTier": "mid",
+    "logoURL": "https://lift-coach.com/favicon.ico",
+    "description": "Tailored CV & LinkedIn profile packages by Lift Coaching.",
+    "pageLink": "https://lift-coach.com/career/",
+    "providerSlug": "lift-coaching",
+    "subCourses": [
+      {
+        "title": "Basic – CV Review",
+        "description": "Live CV review on structure, keywords, design.",
+        "price": "€150",
+        "link": "https://lift-coach.com/career/"
+      },
+      {
+        "title": "Standard – CV Review + Writing",
+        "description": "Includes CV revision and rewriting.",
+        "price": "€350",
+        "link": "https://lift-coach.com/career/"
+      },
+      {
+        "title": "Premium – CV + LinkedIn Optimization",
+        "description": "Full package including LinkedIn SEO and polish.",
+        "price": "€500",
+        "link": "https://lift-coach.com/career/"
+      }
+    ]
   },
   {
-    "title": "LinkedIn Job Search Tactics",
-    "description": "Enhance your LinkedIn profile for recruiters.",
-    "country": "Belgium",
-    "category": "Digital Presence",
-    "priceTier": "low",
-    "startPrice": 75,
-    "logoURL": "https://eurolynk.org/logos/linkedinboost.png",
-    "pageLink": "https://provider-site.com/linkedin-tactics",
-    "subTabs": ["Profile Review", "Networking Strategy"]
+    "id": "mukana-hr-interview-coach",
+    "title": "Interview Coaching – Germany (Mukana HR)",
+    "country": "Germany",
+    "category": "Interview",
+    "startPrice": 120,
+    "priceTier": "mid",
+    "logoURL": "https://mukana-hr.com/favicon.ico",
+    "description": "German cultural and interview skills coaching tailored to employers.",
+    "pageLink": "https://mukana-hr.com/service/interview-coaching/",
+    "providerSlug": "mukana-hr",
+    "subCourses": [
+      {
+        "title": "Mock Interview Session",
+        "description": "Practice interviews with German recruiter feedback.",
+        "price": "€120",
+        "link": "https://mukana-hr.com/service/interview-coaching/"
+      },
+      {
+        "title": "Etiquette & Body Language Coaching",
+        "description": "Non-verbal communication training for German norms.",
+        "price": "€120",
+        "link": "https://mukana-hr.com/service/interview-coaching/"
+      }
+    ]
   },
   {
-    "title": "Recognition of Foreign Degrees",
-    "description": "Assistance with degree recognition in EU countries.",
-    "country": "Italy",
-    "category": "Legal Paperwork",
+    "id": "blci-job-simulation",
+    "title": "Interview Simulation & Coaching – Germany (BLCI)",
+    "country": "Germany",
+    "category": "Interview",
+    "startPrice": 180,
     "priceTier": "high",
-    "startPrice": 400,
-    "logoURL": "https://eurolynk.org/logos/degreeequivalency.png",
-    "pageLink": "https://provider-site.com/degree-recognition",
-    "subTabs": ["Document Translation", "Legal Assistance"]
+    "logoURL": "https://outplacement-blci.de/favicon.ico",
+    "description": "Mock interview, video feedback, salary negotiation, onboarding support.",
+    "pageLink": "https://outplacement-blci.de/en/career-advice/interview-coaching/",
+    "providerSlug": "blci",
+    "subCourses": [
+      {
+        "title": "Interview Simulation + Video Feedback",
+        "description": "Recorded mock interview with personalized feedback.",
+        "price": "€180",
+        "link": "https://outplacement-blci.de/en/career-advice/interview-coaching/"
+      },
+      {
+        "title": "Assessment Center & Management Prep",
+        "description": "Preparation for assessment center and leadership screening.",
+        "price": "€220",
+        "link": "https://outplacement-blci.de/en/career-advice/interview-coaching/"
+      },
+      {
+        "title": "Onboarding & Salary Coaching",
+        "description": "Support for salary negotiation and first 100 days onboarding.",
+        "price": "€200",
+        "link": "https://outplacement-blci.de/en/career-advice/interview-coaching/"
+      }
+    ]
   }
 ]
-
