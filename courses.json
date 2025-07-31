@@ -1,68 +1,113 @@
 [
   {
     "title": "Optimise Interviews UK",
-    "description": "Master your interview skills with expert coaching.",
+    "logoURL": "https://www.optimiseinterviews.com/wp-content/uploads/2021/06/Optimise-Interviews-Logo.png",
+    "description": "Specialized mock interviews and coaching for UK job seekers.",
     "country": "UK",
     "category": "Interview",
-    "priceTier": "mid",
     "startPrice": 150,
-    "logoURL": "https://yourcdn.com/logos/optimiseinterviews.png",
-    "pageLink": "/courses/optimise-interviews",
-    "subTabs": ["Mock Interviews", "1-on-1 Coaching", "Feedback Reports"]
+    "priceTier": "mid",
+    "subTabs": ["Mock Interviews", "Behavioral Coaching", "Executive Interviews"],
+    "pageLink": "https://www.optimiseinterviews.com/"
   },
   {
-    "title": "Medical Coaching Germany",
-    "description": "Comprehensive preparation for medical exams and interviews.",
+    "title": "TopCV Resume Services",
+    "logoURL": "https://www.topcv.com/static/images/TopCV_Logo.png",
+    "description": "Professional CV writing and LinkedIn profile optimization.",
+    "country": "UK",
+    "category": "CV",
+    "startPrice": 90,
+    "priceTier": "low",
+    "subTabs": ["CV Review", "LinkedIn Optimization", "Cover Letter Writing"],
+    "pageLink": "https://www.topcv.com/"
+  },
+  {
+    "title": "PLABable Medical UK",
+    "logoURL": "https://plabable.com/assets/images/logo/plabable-logo.png",
+    "description": "Online PLAB 1 & 2 courses with practice questions and mock exams.",
+    "country": "UK",
+    "category": "Medical",
+    "startPrice": 120,
+    "priceTier": "mid",
+    "subTabs": ["PLAB 1 Course", "PLAB 2 Course", "Mock Exams"],
+    "pageLink": "https://plabable.com/"
+  },
+  {
+    "title": "Udemy Web Development Bootcamp",
+    "logoURL": "https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg",
+    "description": "Full-stack web development bootcamp covering HTML, CSS, JS & more.",
+    "country": "Global",
+    "category": "IT",
+    "startPrice": 20,
+    "priceTier": "low",
+    "subTabs": ["HTML & CSS", "JavaScript", "Node.js"],
+    "pageLink": "https://www.udemy.com/course/the-web-developer-bootcamp/"
+  },
+  {
+    "title": "German Approbation Coaching",
+    "logoURL": "https://www.medical-club.de/wp-content/uploads/2020/10/logo.png",
+    "description": "Preparation courses for medical licensing exams in Germany.",
     "country": "Germany",
     "category": "Medical",
+    "startPrice": 300,
     "priceTier": "high",
-    "startPrice": 450,
-    "logoURL": "https://yourcdn.com/logos/medicalcoaching.png",
-    "pageLink": "/courses/medical-coaching",
-    "subTabs": ["Theory Modules", "Practical Workshops", "Exam Simulations"]
+    "subTabs": ["Medical Language Course", "Exam Simulation", "Document Preparation"],
+    "pageLink": "https://www.medical-club.de/"
   },
   {
-    "title": "CV Perfection France",
-    "description": "Professional CV writing and optimization service.",
-    "country": "France",
-    "category": "CV",
-    "priceTier": "low",
-    "startPrice": 75,
-    "logoURL": "https://yourcdn.com/logos/cvperfection.png",
-    "pageLink": "/courses/cv-perfection",
-    "subTabs": ["CV Templates", "1-on-1 Editing", "ATS Optimization"]
-  },
-  {
-    "title": "Corporate Skills UK",
-    "description": "Develop essential corporate soft skills for career advancement.",
-    "country": "UK",
+    "title": "LinkedIn Learning - Leadership Essentials",
+    "logoURL": "https://cdn.worldvectorlogo.com/logos/linkedin-icon-2.svg",
+    "description": "Build leadership and management skills for corporate environments.",
+    "country": "Global",
     "category": "Corporate",
-    "priceTier": "mid",
-    "startPrice": 200,
-    "logoURL": "https://yourcdn.com/logos/corporateskills.png",
-    "pageLink": "/courses/corporate-skills",
-    "subTabs": ["Leadership", "Communication", "Conflict Resolution"]
+    "startPrice": 40,
+    "priceTier": "low",
+    "subTabs": ["Leadership Skills", "Emotional Intelligence", "Conflict Management"],
+    "pageLink": "https://www.linkedin.com/learning/paths/develop-your-leadership-skills"
   },
   {
-    "title": "IT Certification Bootcamp Germany",
-    "description": "Intensive IT training and certification prep courses.",
-    "country": "Germany",
-    "category": "IT",
-    "priceTier": "high",
-    "startPrice": 500,
-    "logoURL": "https://yourcdn.com/logos/itbootcamp.png",
-    "pageLink": "/courses/it-certification",
-    "subTabs": ["Networking", "Cloud Computing", "Security Fundamentals"]
-  },
-  {
-    "title": "Language Mastery France",
-    "description": "Accelerated language courses for professionals.",
-    "country": "France",
+    "title": "Coursera - Business English for Non-Native Speakers",
+    "logoURL": "https://d3njjcbhbojbot.cloudfront.net/web/images/favicons/favicon-v2.png",
+    "description": "Improve your professional English communication skills.",
+    "country": "Global",
     "category": "Language",
-    "priceTier": "mid",
-    "startPrice": 250,
-    "logoURL": "https://yourcdn.com/logos/languagemastery.png",
-    "pageLink": "/courses/language-mastery",
-    "subTabs": ["Speaking Workshops", "Grammar Clinics", "Cultural Immersion"]
+    "startPrice": 50,
+    "priceTier": "low",
+    "subTabs": ["Business Writing", "Presentation Skills", "Email Etiquette"],
+    "pageLink": "https://www.coursera.org/specializations/business-english"
+  },
+  {
+    "title": "Coding Dojo - Data Science Bootcamp",
+    "logoURL": "https://www.codingdojo.com/assets/images/logo-color.svg",
+    "description": "Intensive bootcamp covering data science, Python, and machine learning.",
+    "country": "Global",
+    "category": "IT",
+    "startPrice": 2500,
+    "priceTier": "high",
+    "subTabs": ["Python", "Machine Learning", "Data Visualization"],
+    "pageLink": "https://www.codingdojo.com/data-science"
+  },
+  {
+    "title": "AFPA Certified Nutritionist Program",
+    "logoURL": "https://www.afpafitness.com/hubfs/AFPA-Logo-Stacked.png",
+    "description": "Become a certified nutrition and wellness consultant.",
+    "country": "Global",
+    "category": "Medical",
+    "startPrice": 899,
+    "priceTier": "high",
+    "subTabs": ["Nutrition Science", "Client Coaching", "Meal Planning"],
+    "pageLink": "https://www.afpafitness.com/programs/certified-nutrition-and-wellness-consultant"
+  },
+  {
+    "title": "Goethe Institute - German for Professionals",
+    "logoURL": "https://www.goethe.de/resources/files/images/goethe-institut-logo.svg",
+    "description": "German language courses tailored for workplace communication.",
+    "country": "Germany",
+    "category": "Language",
+    "startPrice": 500,
+    "priceTier": "high",
+    "subTabs": ["Business German", "Interview Preparation", "Writing Skills"],
+    "pageLink": "https://www.goethe.de/en/spr/ueb/int.html"
   }
 ]
+
