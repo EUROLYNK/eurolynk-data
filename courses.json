@@ -1,48 +1,13 @@
 [
   {
-    "title": "EURES Targeted Mobility Scheme – EU-Wide",
-    "description": "A free EU‑funded service offering personalized job‑matching, CV & interview coaching, and relocation support to help you land a job and integrate smoothly across EU countries.",
-    "logoURL": "https://eures.europa.eu/sites/default/files/eures-logo.png",
-    "pageLink": "https://euresmobility.anpal.gov.it/",
-    "country": "EU-Wide",
-    "category": "Job Matching",
-    "startPrice": 0,
-    "priceTier": "low",
-    "subTabs": [
-      {"name": "Job Matching & Adviser Support", "price": 0},
-      {"name": "Interview Coaching", "price": 0},
-      {"name": "Relocation & Paperwork Guidance", "price": 0}
-    ]
-  },
-  {
-    "title": "SEPE Integration Workshops – Spain",
-    "description": "Spain’s SEPE offers in-person and online integrative workshops for jobseekers new to the EU; includes CV workshops, job fairs, and application assistance in Spanish & English.",
-    "logoURL": "https://www.sepe.es/SiteSepe/contenidos/images/logoSEPE.png",
-    "pageLink": "https://www.sepe.es/web/empresas/empleo-internacional",
-    "country": "Spain",
-    "category": "Job Coaching",
-    "startPrice": 0,
-    "priceTier": "low",
-    "subTabs": [
-      {"name": "CV & Application Workshop", "price": 0},
-      {"name": "Interview & Job Fair Training", "price": 0},
-      {"name": "International Relocation Info", "price": 0}
-    ]
-  },
-  {
-    "title": "Goethe TestDaF & Integration Support – Germany",
-    "description": "Goethe-Institut’s professional German integration and TestDaF prep course helps healthcare, engineering and IT professionals clear language certification and integrate into German labor market.",
-    "logoURL": "https://www.goethe.de/resources/files/images/goethe-institut-logo.svg",
-    "pageLink": "https://www.goethe.de/en/spr/ueb/int.html",
+    "title": "Course Name",
+    "description": "Detailed description here.",
+    "logoURL": "https://link-to-logo.png",
+    "pageLink": "https://link-to-course-page",
     "country": "Germany",
-    "category": "Language",
-    "startPrice": 500,
-    "priceTier": "high",
-    "subTabs": [
-      {"name": "Business German Training", "price": 500},
-      {"name": "TestDaF Exam Prep Module", "price": 200},
-      {"name": "Job Interview Language Coaching", "price": 150}
-    ]
+    "category": "Interview",
+    "priceTier": "mid",
+    "startPrice": 150,
+    "subTabs": ["Service A - €50", "Service B - €100"]
   }
 ]
-
