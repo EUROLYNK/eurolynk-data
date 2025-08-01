@@ -1,13 +1,14 @@
 [
-  {
-    "title": "Course Name",
-    "description": "Detailed description here.",
-    "logoURL": "https://link-to-logo.png",
-    "pageLink": "https://link-to-course-page",
-    "country": "Germany",
-    "category": "Interview",
-    "priceTier": "mid",
-    "startPrice": 150,
-    "subTabs": ["Service A - €50", "Service B - €100"]
-  }
+{
+  "title": "CV Optimization",
+  "description": "Improve your CV with experts.",
+  "description2": "Our CV optimization program helps you tailor your resume for European markets, ensuring ATS compatibility, formatting, and strategic content writing.",
+  "country": "Germany",
+  "category": "CV",
+  "priceTier": "mid",
+  "startPrice": 150,
+  "logoURL": "https://example.com/logo.png",
+  "pageLink": "https://example.com/course",
+  "subTabs": ["CV Review", "ATS Formatting", "Content Strategy"]
+}
 ]
