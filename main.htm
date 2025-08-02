@@ -151,7 +151,7 @@
 
   async function fetchCourses() {
     try {
-      const response = await fetch('https://eurolynk.github.io/eurolynk-data/courses.json');
+      const response = await fetch('./courses.json');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -200,7 +200,9 @@
   }
 
   async function initialize() {
+    console.log('Initializing...');
     const coursesData = await fetchCourses();
+    console.log('Fetched courses:', coursesData);
     renderCourses(coursesData);
 
     searchInput.addEventListener('input', () => renderCourses(coursesData));
