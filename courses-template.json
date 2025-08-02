@@ -1,0 +1,447 @@
+[
+  {
+    "title": "CV Optimization Masterclass",
+    "description": "Learn to create compelling CVs that stand out to European employers. Master ATS optimization, Europass format, and industry-specific best practices.",
+    "description2": "This comprehensive course covers everything you need to know about creating a winning CV for the European job market. From understanding ATS systems to crafting compelling personal statements, you'll learn proven strategies that have helped thousands of job seekers land their dream positions.",
+    "country": "Germany",
+    "category": "CV",
+    "startPrice": 89,
+    "priceTier": "mid",
+    "duration": "2-3 weeks",
+    "format": "Online",
+    "rating": 4.8,
+    "totalReviews": 127,
+    "logoURL": "https://via.placeholder.com/300x200/007BFF/FFFFFF?text=CV+Masterclass",
+    "webpage": "https://example-provider.com/cv-course",
+    "pageLink": "https://example-provider.com/cv-course",
+    "services": [
+      "Personal CV Review",
+      "ATS Optimization Guide",
+      "Industry Templates",
+      "Interview Preparation",
+      "LinkedIn Profile Optimization",
+      "Cover Letter Templates"
+    ],
+    "subTabs": [
+      "CV Writing",
+      "ATS Optimization",
+      "Europass Format",
+      "Industry Specific"
+    ],
+    "badges": [
+      {
+        "text": "Best Seller",
+        "icon": "🔥",
+        "color": "#dc2626"
+      },
+      {
+        "text": "Certified",
+        "icon": "✓",
+        "color": "#10b981"
+      }
+    ],
+    "provider": {
+      "name": "CareerBoost Germany",
+      "description": "Leading career development provider with over 10 years of experience helping professionals succeed in the European job market. Our certified trainers have worked with top companies across Europe."
+    }
+  },
+  {
+    "title": "Interview Preparation Workshop",
+    "description": "Master European interview techniques, behavioral questions, and cultural nuances. Practice with real scenarios and get personalized feedback.",
+    "description2": "Prepare for European job interviews with confidence! This intensive workshop covers behavioral interview techniques, cultural differences, common European interview questions, and practical mock interviews with personalized feedback from experienced HR professionals.",
+    "country": "Netherlands",
+    "category": "Interview",
+    "startPrice": 149,
+    "priceTier": "high",
+    "duration": "1-2 weeks",
+    "format": "Hybrid",
+    "rating": 4.6,
+    "totalReviews": 89,
+    "logoURL": "https://via.placeholder.com/300x200/8B5CF6/FFFFFF?text=Interview+Prep",
+    "webpage": "https://example-provider.com/interview-course",
+    "pageLink": "https://example-provider.com/interview-course",
+    "services": [
+      "Mock Interviews",
+      "Behavioral Question Prep",
+      "Cultural Training",
+      "Video Interview Setup",
+      "Follow-up Email Templates",
+      "Salary Negotiation Guide"
+    ],
+    "subTabs": [
+      "Behavioral Questions",
+      "Cultural Training",
+      "Mock Interviews",
+      "Follow-up Strategy"
+    ],
+    "badges": [
+      {
+        "text": "Live Practice",
+        "icon": "🎥",
+        "color": "#3b82f6"
+      }
+    ],
+    "provider": {
+      "name": "InterviewPro NL",
+      "description": "Specialized interview preparation company with certified HR professionals and career coaches. We've helped over 5,000 candidates successfully navigate European job interviews."
+    }
+  },
+  {
+    "title": "Medical English Certification",
+    "description": "Essential medical English for healthcare professionals working in European hospitals. Covers terminology, patient communication, and documentation.",
+    "description2": "Designed specifically for healthcare professionals, this course provides comprehensive training in medical English terminology, patient communication skills, and proper documentation practices required in European healthcare settings.",
+    "country": "Sweden",
+    "category": "Medical",
+    "startPrice": 199,
+    "priceTier": "high",
+    "duration": "3-4 weeks",
+    "format": "Online",
+    "rating": 4.9,
+    "totalReviews": 234,
+    "logoURL": "https://via.placeholder.com/300x200/10B981/FFFFFF?text=Medical+English",
+    "webpage": "https://example-provider.com/medical-english",
+    "pageLink": "https://example-provider.com/medical-english",
+    "services": [
+      "Medical Terminology",
+      "Patient Communication",
+      "Documentation Practice",
+      "Case Study Analysis",
+      "Pronunciation Guide",
+      "Certification Exam"
+    ],
+    "subTabs": [
+      "Medical Terms",
+      "Patient Care",
+      "Documentation",
+      "Certification"
+    ],
+    "badges": [
+      {
+        "text": "Certified",
+        "icon": "🏥",
+        "color": "#10b981"
+      },
+      {
+        "text": "CE Credits",
+        "icon": "📋",
+        "color": "#f59e0b"
+      }
+    ],
+    "provider": {
+      "name": "MediLingua Sweden",
+      "description": "Leading provider of medical language training with partnerships with major European hospitals and healthcare institutions. Our courses are recognized by European medical boards."
+    }
+  },
+  {
+    "title": "Corporate Leadership Training",
+    "description": "Develop essential leadership skills for European corporate environments. Learn team management, strategic thinking, and cross-cultural communication.",
+    "description2": "Transform your leadership potential with this comprehensive program designed for European corporate environments. Learn effective team management, strategic decision-making, and cross-cultural communication skills that drive organizational success.",
+    "country": "France",
+    "category": "Corporate",
+    "startPrice": 299,
+    "priceTier": "high",
+    "duration": "6-8 weeks",
+    "format": "In-Person",
+    "rating": 4.7,
+    "totalReviews": 156,
+    "logoURL": "https://via.placeholder.com/300x200/1E3A8A/FFFFFF?text=Leadership+Training",
+    "webpage": "https://example-provider.com/leadership-course",
+    "pageLink": "https://example-provider.com/leadership-course",
+    "services": [
+      "Leadership Assessment",
+      "Team Management Tools",
+      "Strategic Planning",
+      "Cross-cultural Training",
+      "Executive Coaching",
+      "Leadership Certification"
+    ],
+    "subTabs": [
+      "Team Leadership",
+      "Strategic Thinking",
+      "Cultural Intelligence",
+      "Executive Skills"
+    ],
+    "badges": [
+      {
+        "text": "Executive Level",
+        "icon": "👔",
+        "color": "#1e3a8a"
+      },
+      {
+        "text": "Certified",
+        "icon": "✓",
+        "color": "#10b981"
+      }
+    ],
+    "provider": {
+      "name": "Leadership Institute France",
+      "description": "Premier leadership development institute with over 20 years of experience training executives across Europe. Our programs are accredited by leading business schools and professional organizations."
+    }
+  },
+  {
+    "title": "Web Development Bootcamp",
+    "description": "Intensive coding bootcamp covering modern web technologies. Learn HTML, CSS, JavaScript, React, and Node.js with hands-on projects.",
+    "description2": "Jumpstart your tech career with our intensive web development bootcamp! Learn modern web technologies including HTML5, CSS3, JavaScript ES6+, React, and Node.js through hands-on projects and real-world applications.",
+    "country": "Germany",
+    "category": "IT",
+    "startPrice": 1299,
+    "priceTier": "high",
+    "duration": "3-6 months",
+    "format": "Hybrid",
+    "rating": 4.5,
+    "totalReviews": 312,
+    "logoURL": "https://via.placeholder.com/300x200/DC2626/FFFFFF?text=Web+Dev+Bootcamp",
+    "webpage": "https://example-provider.com/web-dev-bootcamp",
+    "pageLink": "https://example-provider.com/web-dev-bootcamp",
+    "services": [
+      "Full-stack Development",
+      "Project Portfolio",
+      "Career Services",
+      "Mentorship Program",
+      "Job Placement Support",
+      "Lifetime Access"
+    ],
+    "subTabs": [
+      "Frontend Development",
+      "Backend Development",
+      "Database Design",
+      "Deployment"
+    ],
+    "badges": [
+      {
+        "text": "Intensive",
+        "icon": "⚡",
+        "color": "#dc2626"
+      },
+      {
+        "text": "Job Ready",
+        "icon": "💼",
+        "color": "#10b981"
+      }
+    ],
+    "provider": {
+      "name": "CodeAcademy Germany",
+      "description": "Leading coding bootcamp with a proven track record of placing graduates in top tech companies across Europe. Our curriculum is constantly updated to match industry demands."
+    }
+  },
+  {
+    "title": "German Language for Business",
+    "description": "Professional German language course focused on business communication, presentations, and workplace vocabulary.",
+    "description2": "Master German for professional success! This specialized course focuses on business German, including presentations, meetings, email correspondence, and workplace vocabulary essential for thriving in German-speaking business environments.",
+    "country": "Germany",
+    "category": "Language",
+    "startPrice": 79,
+    "priceTier": "mid",
+    "duration": "2-3 months",
+    "format": "Online",
+    "rating": 4.4,
+    "totalReviews": 198,
+    "logoURL": "https://via.placeholder.com/300x200/F59E0B/FFFFFF?text=German+Business",
+    "webpage": "https://example-provider.com/german-business",
+    "pageLink": "https://example-provider.com/german-business",
+    "services": [
+      "Business Vocabulary",
+      "Presentation Skills",
+      "Email Writing",
+      "Meeting Participation",
+      "Cultural Context",
+      "Pronunciation Practice"
+    ],
+    "subTabs": [
+      "Business German",
+      "Presentations",
+      "Email Writing",
+      "Cultural Context"
+    ],
+    "badges": [
+      {
+        "text": "Business Focus",
+        "icon": "💼",
+        "color": "#f59e0b"
+      }
+    ],
+    "provider": {
+      "name": "DeutschPro Institute",
+      "description": "Specialized German language institute with native speakers and business professionals. Our courses are designed specifically for professionals working in German-speaking markets."
+    }
+  },
+  {
+    "title": "Data Science Fundamentals",
+    "description": "Introduction to data science with Python, statistics, and machine learning. Perfect for beginners starting their data career.",
+    "description2": "Begin your data science journey with this comprehensive introduction! Learn Python programming, statistical analysis, and machine learning fundamentals through practical projects and real-world datasets.",
+    "country": "Netherlands",
+    "category": "IT",
+    "startPrice": 199,
+    "priceTier": "mid",
+    "duration": "4-6 weeks",
+    "format": "Online",
+    "rating": 4.6,
+    "totalReviews": 145,
+    "logoURL": "https://via.placeholder.com/300x200/8B5CF6/FFFFFF?text=Data+Science",
+    "webpage": "https://example-provider.com/data-science",
+    "pageLink": "https://example-provider.com/data-science",
+    "services": [
+      "Python Programming",
+      "Statistical Analysis",
+      "Data Visualization",
+      "Machine Learning Basics",
+      "Project Portfolio",
+      "Career Guidance"
+    ],
+    "subTabs": [
+      "Python Basics",
+      "Statistics",
+      "Data Visualization",
+      "Machine Learning"
+    ],
+    "badges": [
+      {
+        "text": "Beginner Friendly",
+        "icon": "🎯",
+        "color": "#8b5cf6"
+      },
+      {
+        "text": "Project Based",
+        "icon": "📊",
+        "color": "#3b82f6"
+      }
+    ],
+    "provider": {
+      "name": "DataAcademy Netherlands",
+      "description": "Leading data science education provider with industry partnerships and expert instructors. Our courses are designed to bridge the gap between academic theory and practical application."
+    }
+  },
+  {
+    "title": "French for Healthcare",
+    "description": "Specialized French course for healthcare professionals. Learn medical terminology, patient communication, and healthcare documentation in French.",
+    "description2": "Essential French language skills for healthcare professionals working in French-speaking regions. Master medical terminology, patient communication, and healthcare documentation through specialized training designed for medical contexts.",
+    "country": "France",
+    "category": "Language",
+    "startPrice": 159,
+    "priceTier": "high",
+    "duration": "3-4 weeks",
+    "format": "Hybrid",
+    "rating": 4.8,
+    "totalReviews": 167,
+    "logoURL": "https://via.placeholder.com/300x200/DC2626/FFFFFF?text=French+Healthcare",
+    "webpage": "https://example-provider.com/french-healthcare",
+    "pageLink": "https://example-provider.com/french-healthcare",
+    "services": [
+      "Medical French Vocabulary",
+      "Patient Communication",
+      "Healthcare Documentation",
+      "Cultural Sensitivity",
+      "Pronunciation Practice",
+      "Certification Exam"
+    ],
+    "subTabs": [
+      "Medical Terms",
+      "Patient Care",
+      "Documentation",
+      "Cultural Context"
+    ],
+    "badges": [
+      {
+        "text": "Medical Focus",
+        "icon": "🏥",
+        "color": "#dc2626"
+      },
+      {
+        "text": "Certified",
+        "icon": "✓",
+        "color": "#10b981"
+      }
+    ],
+    "provider": {
+      "name": "MediFrançais Institute",
+      "description": "Specialized French language training for healthcare professionals with partnerships with French hospitals and medical institutions. Our courses meet European healthcare language standards."
+    }
+  },
+  {
+    "title": "Digital Marketing Strategy",
+    "description": "Comprehensive digital marketing course covering SEO, social media, content marketing, and analytics for European markets.",
+    "description2": "Master digital marketing for European markets! Learn SEO optimization, social media strategy, content marketing, and analytics tools essential for modern business success in the digital age.",
+    "country": "Spain",
+    "category": "Corporate",
+    "startPrice": 129,
+    "priceTier": "mid",
+    "duration": "4-5 weeks",
+    "format": "Online",
+    "rating": 4.3,
+    "totalReviews": 89,
+    "logoURL": "https://via.placeholder.com/300x200/10B981/FFFFFF?text=Digital+Marketing",
+    "webpage": "https://example-provider.com/digital-marketing",
+    "pageLink": "https://example-provider.com/digital-marketing",
+    "services": [
+      "SEO Optimization",
+      "Social Media Strategy",
+      "Content Marketing",
+      "Google Analytics",
+      "Campaign Planning",
+      "ROI Measurement"
+    ],
+    "subTabs": [
+      "SEO & SEM",
+      "Social Media",
+      "Content Strategy",
+      "Analytics"
+    ],
+    "badges": [
+      {
+        "text": "Industry Focus",
+        "icon": "📈",
+        "color": "#10b981"
+      }
+    ],
+    "provider": {
+      "name": "DigitalPro Spain",
+      "description": "Leading digital marketing education provider with expertise in European markets. Our instructors are industry professionals with proven track records in digital marketing success."
+    }
+  },
+  {
+    "title": "Cybersecurity Essentials",
+    "description": "Learn fundamental cybersecurity concepts, threat detection, and security best practices for modern organizations.",
+    "description2": "Protect your organization with essential cybersecurity knowledge! Learn threat detection, security best practices, and risk management strategies crucial for modern business operations.",
+    "country": "Finland",
+    "category": "IT",
+    "startPrice": 249,
+    "priceTier": "high",
+    "duration": "5-6 weeks",
+    "format": "Online",
+    "rating": 4.7,
+    "totalReviews": 134,
+    "logoURL": "https://via.placeholder.com/300x200/1E3A8A/FFFFFF?text=Cybersecurity",
+    "webpage": "https://example-provider.com/cybersecurity",
+    "pageLink": "https://example-provider.com/cybersecurity",
+    "services": [
+      "Threat Detection",
+      "Security Best Practices",
+      "Risk Assessment",
+      "Incident Response",
+      "Security Tools",
+      "Certification Prep"
+    ],
+    "subTabs": [
+      "Threat Analysis",
+      "Security Tools",
+      "Risk Management",
+      "Incident Response"
+    ],
+    "badges": [
+      {
+        "text": "Security Focus",
+        "icon": "🔒",
+        "color": "#1e3a8a"
+      },
+      {
+        "text": "Certified",
+        "icon": "✓",
+        "color": "#10b981"
+      }
+    ],
+    "provider": {
+      "name": "SecureTech Finland",
+      "description": "Leading cybersecurity education provider with expertise in European security standards and regulations. Our courses prepare professionals for industry-recognized certifications."
+    }
+  }
+]
