@@ -1,42 +1,105 @@
 [
-{
-  "title": "CV Optimization",
-  "description": "Improve your CV with experts.",
-  "description2": "Our CV optimization program helps you tailor your resume for European markets, ensuring ATS compatibility, formatting, and strategic content writing.",
-  "country": "Germany",
-  "category": "CV",
-  "priceTier": "mid",
-  "logoURL": "https://example.com/logo.png",
-  "pageLink": "https://example.com/course",
-  "webpage": "https://example.com/course",
-  "subTabs": ["CV Review", "ATS Formatting", "Content Strategy"],
-  "services": ["Professional CV Review", "ATS Optimization", "Cover Letter Writing"],
-  "duration": "4 weeks",
-  "format": "Online",
-  "badges": [
-    {
-      "text": "Best Seller",
-      "color": "#F56B0B",
-      "icon": "🔥"
-    },
-    {
-      "text": "New",
-      "color": "#10B081",
-      "icon": "✨"
-    },
-    {
-      "text": "Certified",
-      "color": "#3A82B6",
-      "icon": "🏅"
+  {
+    "title": "CV Optimization",
+    "description": "Improve your CV with experts.",
+    "description2": "Our CV optimization program helps you tailor your resume for European markets, ensuring ATS compatibility, formatting, and strategic content writing.",
+    "country": "Germany",
+    "category": "CV",
+    "startPrice": 89,
+    "priceTier": "mid",
+    "logoURL": "https://via.placeholder.com/300x200/007BFF/FFFFFF?text=CV+Optimization",
+    "pageLink": "https://example.com/course",
+    "webpage": "https://example.com/course",
+    "subTabs": ["CV Review", "ATS Formatting", "Content Strategy"],
+    "services": ["Professional CV Review", "ATS Optimization", "Cover Letter Writing"],
+    "duration": "4 weeks",
+    "format": "Online",
+    "rating": 4.8,
+    "totalReviews": 156,
+    "badges": [
+      {
+        "text": "Best Seller",
+        "color": "#F56B0B",
+        "icon": "🔥"
+      },
+      {
+        "text": "New",
+        "color": "#10B081",
+        "icon": "✨"
+      },
+      {
+        "text": "Certified",
+        "color": "#3A82B6",
+        "icon": "🏅"
+      }
+    ],
+    "provider": {
+      "name": "EuroCareer Solutions",
+      "description": "Leading career development company with 10+ years experience in European job markets."
     }
-  ],
-  "rating": 4.8,
-  "totalReviews": 156,
-  "provider": {
-    "name": "EuroCareer Solutions",
-    "logo": "https://example.com/provider-logo.png",
-    "description": "Leading career development company with 10+ years experience in European job markets.",
-    "website": "https://eurocareer.com"
+  },
+  {
+    "title": "Interview Preparation Workshop",
+    "description": "Master European interview techniques and cultural nuances.",
+    "description2": "Comprehensive interview preparation covering behavioral questions, cultural differences, and practical mock interviews with European HR professionals.",
+    "country": "Netherlands",
+    "category": "Interview",
+    "startPrice": 149,
+    "priceTier": "high",
+    "logoURL": "https://via.placeholder.com/300x200/8B5CF6/FFFFFF?text=Interview+Prep",
+    "pageLink": "https://example.com/interview-course",
+    "webpage": "https://example.com/interview-course",
+    "subTabs": ["Behavioral Questions", "Cultural Training", "Mock Interviews"],
+    "services": ["Mock Interviews", "Behavioral Prep", "Cultural Training"],
+    "duration": "2 weeks",
+    "format": "Hybrid",
+    "rating": 4.6,
+    "totalReviews": 89,
+    "badges": [
+      {
+        "text": "Live Practice",
+        "color": "#3b82f6",
+        "icon": "🎥"
+      }
+    ],
+    "provider": {
+      "name": "InterviewPro NL",
+      "description": "Specialized interview preparation with certified HR professionals."
+    }
+  },
+  {
+    "title": "Medical English Certification",
+    "description": "Essential medical English for healthcare professionals.",
+    "description2": "Comprehensive medical English training covering terminology, patient communication, and healthcare documentation for European hospitals.",
+    "country": "Sweden",
+    "category": "Medical",
+    "startPrice": 199,
+    "priceTier": "high",
+    "logoURL": "https://via.placeholder.com/300x200/10B981/FFFFFF?text=Medical+English",
+    "pageLink": "https://example.com/medical-english",
+    "webpage": "https://example.com/medical-english",
+    "subTabs": ["Medical Terms", "Patient Care", "Documentation"],
+    "services": ["Medical Terminology", "Patient Communication", "Certification"],
+    "duration": "3 weeks",
+    "format": "Online",
+    "rating": 4.9,
+    "totalReviews": 234,
+    "badges": [
+      {
+        "text": "Certified",
+        "color": "#10b981",
+        "icon": "🏥"
+      },
+      {
+        "text": "CE Credits",
+        "color": "#f59e0b",
+        "icon": "📋"
+      }
+    ],
+    "provider": {
+      "name": "MediLingua Sweden",
+      "description": "Leading medical language training provider with hospital partnerships."
+    }
   }
-  ]
+]
 
