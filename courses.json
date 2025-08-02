@@ -10,6 +10,6 @@
   "logoURL": "https://example.com/logo.png",
   "pageLink": "https://example.com/course",
   "subTabs": ["CV Review", "ATS Formatting", "Content Strategy"],
-  "services": ["CV Review - 50 euros", "ATS - 60 euros", "content strategy - 2 euros"]
+  "services": ["CV Review - 50 euros", "ATS - 60 euros", "content strategy - 2 euros"],
 }
 ]
