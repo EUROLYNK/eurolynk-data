@@ -6,10 +6,22 @@
   "country": "Germany",
   "category": "CV",
   "priceTier": "mid",
-  "startPrice": 150,
-  "logoURL": "https://cdn.discordapp.com/attachments/1327534488770842635/1401218797624623214/image.png?ex=688f7a32&is=688e28b2&hm=01df44d0d05393d58837ff4685e9c8db6d13375c0c0818ff5296a5348c9cffb0",
+  "logoURL": "https://example.com/logo.png",
   "pageLink": "https://example.com/course",
+  "webpage": "https://example.com/course",
   "subTabs": ["CV Review", "ATS Formatting", "Content Strategy"],
-  "services": ["hi", "lol", "perfeto"]
-}
-]
+  "services": ["Professional CV Review", "ATS Optimization", "Cover Letter Writing"],
+  "duration": "4 weeks",
+  "format": "Online",
+  "bestseller": "Yes",
+  "new": "No",
+  "trending": "No",
+  "certified": "Yes",
+  "provider": {
+    "name": "EuroCareer Solutions",
+    "logo": "https://example.com/provider-logo.png",
+    "description": "Leading career development company with 10+ years experience in European job markets.",
+    "website": "https://eurocareer.com"
+  }
+  ]
+
