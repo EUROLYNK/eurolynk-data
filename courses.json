@@ -13,10 +13,25 @@
   "services": ["Professional CV Review", "ATS Optimization", "Cover Letter Writing"],
   "duration": "4 weeks",
   "format": "Online",
-  "bestseller": "Yes",
-  "new": "No",
-  "trending": "No",
-  "certified": "Yes",
+  "badges": [
+    {
+      "text": "Best Seller",
+      "color": "#F56B0B",
+      "icon": "🔥"
+    },
+    {
+      "text": "New",
+      "color": "#10B081",
+      "icon": "✨"
+    },
+    {
+      "text": "Certified",
+      "color": "#3A82B6",
+      "icon": "🏅"
+    }
+  ],
+  "rating": 4.8,
+  "totalReviews": 156,
   "provider": {
     "name": "EuroCareer Solutions",
     "logo": "https://example.com/provider-logo.png",
