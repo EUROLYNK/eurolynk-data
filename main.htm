@@ -92,6 +92,31 @@
     border-radius: 8px;
     font-size: 0.8rem;
   }
+
+  /* AI Assistant styles */
+  .ai-assistant { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+  .ai-chat-toggle { background: #1e3a8a; color: #fff; border: none; border-radius: 50%; width: 56px; height: 56px; cursor: pointer; box-shadow: 0 4px 12px rgba(30,58,138,0.3); font-weight: 600; }
+  .ai-chat-toggle:hover { background: #0f2a6e; }
+  .ai-chat-window { position: absolute; bottom: 70px; right: 0; width: 360px; height: 480px; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; box-shadow: 0 12px 24px rgba(0,0,0,0.15); display: flex; flex-direction: column; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; }
+  .ai-chat-window.active { opacity: 1; visibility: visible; transform: translateY(0); }
+  .ai-chat-header { padding: 1rem; background: #1e3a8a; color: #fff; border-radius: 12px 12px 0 0; text-align: center; }
+  .ai-chat-messages { flex: 1; padding: 0.75rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+  .ai-message { background: #f3f4f6; padding: 0.6rem; border-radius: 8px; border-left: 3px solid #1e3a8a; font-size: 0.9rem; }
+  .user-message { background: #e0f2fe; padding: 0.6rem; border-radius: 8px; align-self: flex-end; max-width: 85%; color: #0c4a6e; font-size: 0.9rem; }
+  .ai-chat-input { padding: 0.75rem; border-top: 1px solid #e5e7eb; display: flex; gap: 0.5rem; }
+  .ai-chat-input input { flex: 1; padding: 0.5rem; border: 1px solid #e5e7eb; border-radius: 6px; }
+  .ai-chat-input button { background: #1e3a8a; color: #fff; border: none; padding: 0.5rem 0.9rem; border-radius: 6px; cursor: pointer; font-weight: 500; }
+
+  /* Nested course price list */
+  .nested-prices { padding: 0 1rem 1rem; }
+  .nested-prices .nested-title { font-size: 0.9rem; font-weight: 600; color: #334155; margin: 0 0 0.4rem 0; }
+  .nested-prices ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
+  .nested-prices li { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 6px; padding: 0.4rem 0.6rem; font-size: 0.88rem; color: #374151; }
+  .nested-prices .nested-more { font-size: 0.85rem; color: #1e3a8a; margin-top: 0.3rem; }
+
+  @media (max-width: 768px) {
+    .ai-chat-window { width: 310px; height: 420px; }
+  }
 </style>
 
 <div class="grid-header">
@@ -142,6 +167,29 @@
   <!-- Courses will be loaded dynamically here -->
 </div>
 
+<!-- AI Assistant UI -->
+<div class="ai-assistant">
+  <button class="ai-chat-toggle" id="aiChatToggle" aria-label="Open AI Course Assistant">AI</button>
+  <div class="ai-chat-window" id="aiChatWindow">
+    <div class="ai-chat-header">
+      <h3>Course Assistant</h3>
+      <p>Ask about courses, countries, and prices</p>
+    </div>
+    <div class="ai-chat-messages" id="aiChatMessages">
+      <div class="ai-message">
+        <strong>Hi! I can answer:</strong><br>
+        • What courses does CodeCamp Europe have?<br>
+        • Prices for Business German in Austria?<br>
+        • Show IT courses in Spain under €300
+      </div>
+    </div>
+    <div class="ai-chat-input">
+      <input type="text" id="aiChatInput" placeholder="Type your message..." maxlength="160">
+      <button id="aiSendBtn">Send</button>
+    </div>
+  </div>
+</div>
+ 
 <script>
   const searchInput = document.getElementById('searchInput');
   const countryFilter = document.getElementById('countryFilter');
@@ -149,7 +197,17 @@
   const priceFilter = document.getElementById('priceFilter');
   const courseGrid = document.getElementById('courseGrid');
 
-  async function fetchCourses() {
+  // AI elements
+  const aiChatToggle = document.getElementById('aiChatToggle');
+  const aiChatWindow = document.getElementById('aiChatWindow');
+  const aiChatMessages = document.getElementById('aiChatMessages');
+  const aiChatInput = document.getElementById('aiChatInput');
+  const aiSendBtn = document.getElementById('aiSendBtn');
+
+  // global state
+  let coursesData = [];
+
+    async function fetchCourses() {
     try {
       const response = await fetch('https://eurolynk.github.io/eurolynk-data/courses.json');
       if (!response.ok) {
@@ -163,7 +221,7 @@
     }
   }
 
-  function renderCourses(coursesData) {
+  function renderCourses() {
     courseGrid.innerHTML = '';
     const searchTerm = searchInput.value.toLowerCase();
     const selectedCountry = countryFilter.value;
@@ -171,7 +229,7 @@
     const selectedPrice = priceFilter.value;
 
     coursesData.forEach(course => {
-      const matchesSearch = course.title.toLowerCase().includes(searchTerm);
+      const matchesSearch = course.title.toLowerCase().includes(searchTerm) || (course.description || '').toLowerCase().includes(searchTerm);
       const matchesCountry = !selectedCountry || course.country === selectedCountry;
       const matchesCategory = !selectedCategory || course.category === selectedCategory;
       const matchesPrice = !selectedPrice || course.priceTier === selectedPrice;
@@ -180,33 +238,188 @@
         const subTabsHtml = Array.isArray(course.subTabs) ? course.subTabs.map(sub => `<li>${sub}</li>`).join('') : '';
 
         const courseCard = document.createElement('a');
-        courseCard.href = course.pageLink;
+        courseCard.href = course.pageLink || course.webpage || '#';
+        courseCard.target = course.pageLink || course.webpage ? '_blank' : '_self';
         courseCard.className = 'course-card';
         courseCard.setAttribute('data-country', course.country);
         courseCard.setAttribute('data-category', course.category);
         courseCard.setAttribute('data-price', course.priceTier);
         courseCard.innerHTML = `
           <img src="${course.logoURL}" alt="${course.title}">
-          <h2>${course.title}</h2>
+          <h2>${course.title} - ${course.country}</h2>
           <p>${course.description}</p>
           <div class="price-info">Starting from €${course.startPrice}</div>
           <div class="sub-tabs">
             <ul>${subTabsHtml}</ul>
           </div>
+          ${Array.isArray(course.courses) && course.courses.length ? `
+            <div class="nested-prices">
+              <div class="nested-title">Available courses & prices</div>
+              <ul>
+                ${course.courses.slice(0,3).map(it => `<li>${(it.name || it.title || 'Course')}: ${it.price ? formatMoney(it.price) : (it.startPrice?formatMoney(it.startPrice):'price varies')}</li>`).join('')}
+              </ul>
+              ${course.courses.length > 3 ? `<div class="nested-more">+ ${course.courses.length - 3} more</div>` : ''}
+            </div>
+          ` : ''}
         `;
         courseGrid.appendChild(courseCard);
       }
     });
   }
 
-  async function initialize() {
-    const coursesData = await fetchCourses();
-    renderCourses(coursesData);
+  function addAiMessage(html) {
+    const div = document.createElement('div');
+    div.className = 'ai-message';
+    div.innerHTML = html;
+    aiChatMessages.appendChild(div);
+    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+  }
 
-    searchInput.addEventListener('input', () => renderCourses(coursesData));
-    countryFilter.addEventListener('change', () => renderCourses(coursesData));
-    categoryFilter.addEventListener('change', () => renderCourses(coursesData));
-    priceFilter.addEventListener('change', () => renderCourses(coursesData));
+  function addUserMessage(text) {
+    const div = document.createElement('div');
+    div.className = 'user-message';
+    div.textContent = text;
+    aiChatMessages.appendChild(div);
+    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+  }
+
+  function toggleAiChat() {
+    aiChatWindow.classList.toggle('active');
+    if (aiChatWindow.classList.contains('active')) {
+      aiChatInput.focus();
+    }
+  }
+
+  function formatMoney(value) {
+    if (typeof value !== 'number') return '';
+    return `€${value.toLocaleString('en-IE', { maximumFractionDigits: 0 })}`;
+  }
+
+  function findCoursesByTitleOrProvider(query) {
+    const q = query.toLowerCase();
+    return coursesData.filter(c =>
+      (c.title && c.title.toLowerCase().includes(q)) ||
+      (c.provider && c.provider.name && c.provider.name.toLowerCase().includes(q))
+    );
+  }
+
+  function answerUserQuery(q) {
+    const query = q.trim().toLowerCase();
+
+    // greetings
+    if (["hi","hello","hey"].some(g => query.includes(g))) {
+      addAiMessage("Hello! Ask me about courses, providers, countries, or prices.");
+      return;
+    }
+
+    // by country
+    const countryMatch = query.match(/germany|france|italy|spain|netherlands|belgium|sweden|austria|portugal|ireland|denmark|finland|poland|greece|czech republic|hungary|romania|bulgaria/);
+    if (countryMatch) {
+      const country = countryMatch[0].replace(/\b\w/g, m => m.toUpperCase());
+      const list = coursesData.filter(c => (c.country || '').toLowerCase() === countryMatch[0]);
+      if (list.length) {
+        const lines = list.slice(0,5).map(c => `• <strong>${c.title}</strong> — ${formatMoney(c.startPrice)} (${c.category})`).join('<br>');
+        addAiMessage(`Courses in <strong>${country}</strong>:<br><br>${lines}`);
+      } else {
+        addAiMessage(`I couldn't find courses in ${country}. Try another country.`);
+      }
+      return;
+    }
+
+    // categories
+    const categoryAliases = {
+      cv: 'CV', interview: 'Interview', medical: 'Medical', corporate: 'Corporate', it: 'IT', language: 'Language'
+    };
+    const catKey = Object.keys(categoryAliases).find(k => query.includes(k));
+    if (catKey) {
+      const cat = categoryAliases[catKey];
+      const list = coursesData.filter(c => c.category === cat);
+      if (list.length) {
+        const lines = list.slice(0,5).map(c => `• <strong>${c.title}</strong> — ${formatMoney(c.startPrice)} in ${c.country}`).join('<br>');
+        addAiMessage(`Top ${cat} courses:<br><br>${lines}`);
+      } else {
+        addAiMessage(`No ${cat} courses found right now.`);
+      }
+      return;
+    }
+
+    // price intent
+    const wantsCheap = /(cheap|affordable|budget|under\s*\€?\s*\d+)/.test(query);
+    const priceNumber = (query.match(/\d+/) || [null])[0];
+    if (wantsCheap || priceNumber) {
+      const threshold = priceNumber ? Number(priceNumber) : 150;
+      const list = coursesData.filter(c => typeof c.startPrice === 'number' && c.startPrice <= threshold).sort((a,b) => a.startPrice - b.startPrice).slice(0,6);
+      if (list.length) {
+        const lines = list.map(c => `• <strong>${c.title}</strong> — ${formatMoney(c.startPrice)} in ${c.country}`).join('<br>');
+        addAiMessage(`Most affordable options${priceNumber?` under €${threshold}`:''}:<br><br>${lines}`);
+      } else {
+        addAiMessage("I couldn't find courses in that price range.");
+      }
+      return;
+    }
+
+    // provider or course-specific
+    const matched = findCoursesByTitleOrProvider(query);
+    if (matched.length) {
+      // if asking prices or 'what courses does ... have'
+      const askPrices = /(price|cost|fee|how much)/.test(query);
+      const askWhatCourses = /(what\s+courses\s+does)|courses\s+under|show\s+courses|list\s+courses/.test(query);
+
+      const c = matched[0];
+      // if nested courses array exists, use it. Otherwise fall back to startPrice
+      const nested = Array.isArray(c.courses) ? c.courses : null;
+
+      if (askWhatCourses && nested) {
+        const lines = nested.map(it => `• ${it.name || it.title || 'Course'} — ${it.price ? formatMoney(it.price) : (it.startPrice?formatMoney(it.startPrice):'price varies')}`).join('<br>');
+        addAiMessage(`Courses offered for <strong>${c.title}</strong>:<br><br>${lines}`);
+        return;
+      }
+
+      if (askPrices) {
+        if (nested && nested.length) {
+          const lines = nested.map(it => `• ${it.name || it.title || 'Course'} — ${it.price ? formatMoney(it.price) : (it.startPrice?formatMoney(it.startPrice):'price varies')}`).join('<br>');
+          addAiMessage(`Prices for <strong>${c.title}</strong>:<br><br>${lines}`);
+        } else {
+          addAiMessage(`${c.title} starts from <strong>${formatMoney(c.startPrice)}</strong>.`);
+        }
+        return;
+      }
+
+      // default info summary
+      addAiMessage(`<strong>${c.title}</strong> in ${c.country} — ${formatMoney(c.startPrice)} (${c.category})<br>${c.description || ''}`);
+      return;
+    }
+
+    addAiMessage("I can search by country, category, provider, or price. Try: 'What courses does CodeCamp Europe have?' or 'Prices for Business German'.");
+  }
+
+  function wireAi() {
+    aiChatToggle.addEventListener('click', toggleAiChat);
+    aiSendBtn.addEventListener('click', () => {
+      const text = aiChatInput.value.trim();
+      if (!text) return;
+      addUserMessage(text);
+      aiChatInput.value = '';
+      setTimeout(() => answerUserQuery(text), 250);
+    });
+    aiChatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        aiSendBtn.click();
+      }
+    });
+  }
+
+  async function initialize() {
+    coursesData = await fetchCourses();
+    renderCourses();
+
+    searchInput.addEventListener('input', renderCourses);
+    countryFilter.addEventListener('change', renderCourses);
+    categoryFilter.addEventListener('change', renderCourses);
+    priceFilter.addEventListener('change', renderCourses);
+
+    wireAi();
   }
 
   initialize();
