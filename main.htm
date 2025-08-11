@@ -1,213 +1,880 @@
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9fafb;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  .grid-header {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(90deg, #007BFF, #00C6FF);
-    color: white;
-    border-bottom: 4px solid #005bb5;
-  }
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    border-radius: 12px;
-    margin: 1rem auto;
-    width: 90%;
-    max-width: 1200px;
-  }
-  .filters input, .filters select {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    flex: 1 1 200px;
-    max-width: 250px;
-  }
-  .course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-    width: 90%;
-    max-width: 1300px;
-    margin: auto;
-  }
-  .course-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-  .course-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: contain;
-    background: #f1f1f1;
-    padding: 10px;
-  }
-  .course-card h2 {
-    font-size: 1.2rem;
-    margin: 0.5rem 1rem 0;
-  }
-  .course-card p {
-    font-size: 0.95rem;
-    margin: 0.5rem 1rem 1rem;
-    color: #555;
-  }
-  .price-info {
-    font-weight: bold;
-    color: #007BFF;
-    margin: 0 1rem 1rem;
-  }
-  .sub-tabs ul {
-    list-style: none;
-    padding: 0 1rem 1rem;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .sub-tabs li {
-    background: #e6f0ff;
-    color: #005bb5;
-    padding: 0.3rem 0.7rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuroLynk Course Directory - AI-Powered Course Finder</title>
+    <meta name="description" content="AI-powered course discovery platform. Find and compare courses across Europe with intelligent search and recommendations.">
+    
+    <style>
+        :root {
+            --primary-blue: #007BFF;
+            --secondary-blue: #0056D2;
+            --light-blue: #E3F2FD;
+            --lighter-blue: #F0F8FF;
+            --dark-blue: #005bb5;
+            --navy-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue-border: #BBDEFB;
+            --red: #dc2626;
+            --dark-red: #b91c1c;
+            --gray-bg: #f8fafc;
+            --white: #ffffff;
+            --text-dark: #1f2937;
+            --text-medium: #6b7280;
+            --border-light: #e5e7eb;
+            --shadow-light: rgba(0,0,0,0.04);
+            --shadow-medium: rgba(0,0,0,0.1);
+            --shadow-heavy: rgba(0,0,0,0.25);
+        }
 
-<div class="grid-header">
-  <h1>EuroLynk Course Directory</h1>
-</div>
+        * {
+            box-sizing: border-box;
+        }
 
-<div class="filters">
-  <input type="text" id="searchInput" placeholder="Search courses...">
-  <select id="countryFilter">
-    <option value="">All Countries</option>
-    <option value="Germany">Germany</option>
-    <option value="France">France</option>
-    <option value="Italy">Italy</option>
-    <option value="Netherlands">Netherlands</option>
-    <option value="Spain">Spain</option>
-    <option value="Belgium">Belgium</option>
-    <option value="Sweden">Sweden</option>
-    <option value="Austria">Austria</option>
-    <option value="Portugal">Portugal</option>
-    <option value="Ireland">Ireland</option>
-    <option value="Denmark">Denmark</option>
-    <option value="Finland">Finland</option>
-    <option value="Poland">Poland</option>
-    <option value="Greece">Greece</option>
-    <option value="Czech Republic">Czech Republic</option>
-    <option value="Hungary">Hungary</option>
-    <option value="Romania">Romania</option>
-    <option value="Bulgaria">Bulgaria</option>
-  </select>
-  <select id="categoryFilter">
-    <option value="">All Categories</option>
-    <option value="Interview">Interview</option>
-    <option value="CV">CV</option>
-    <option value="Medical">Medical</option>
-    <option value="Corporate">Corporate</option>
-    <option value="IT">IT</option>
-    <option value="Language">Language</option>
-  </select>
-  <select id="priceFilter">
-    <option value="">All Prices</option>
-    <option value="low">Under €100</option>
-    <option value="mid">€100 - €300</option>
-    <option value="high">Above €300</option>
-  </select>
-</div>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
 
-<div class="course-grid" id="courseGrid">
-  <!-- Courses will be loaded dynamically here -->
-</div>
+        .grid-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-<script>
-  const searchInput = document.getElementById('searchInput');
-  const countryFilter = document.getElementById('countryFilter');
-  const categoryFilter = document.getElementById('categoryFilter');
-  const priceFilter = document.getElementById('priceFilter');
-  const courseGrid = document.getElementById('courseGrid');
+        .grid-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
 
-  async function fetchCourses() {
-    try {
-      const response = await fetch('https://eurolynk.github.io/eurolynk-data/courses.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-      return [];
-    }
-  }
+        .grid-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
 
-  function renderCourses(coursesData) {
-    courseGrid.innerHTML = '';
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedCountry = countryFilter.value;
-    const selectedCategory = categoryFilter.value;
-    const selectedPrice = priceFilter.value;
+        .grid-header p {
+            font-size: 1.2rem;
+            margin: 1rem 0 0;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
 
-    coursesData.forEach(course => {
-      const matchesSearch = course.title.toLowerCase().includes(searchTerm);
-      const matchesCountry = !selectedCountry || course.country === selectedCountry;
-      const matchesCategory = !selectedCategory || course.category === selectedCategory;
-      const matchesPrice = !selectedPrice || course.priceTier === selectedPrice;
+        .ai-chat-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 400px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            transform: translateY(100%);
+            opacity: 0;
+        }
 
-      if (matchesSearch && matchesCountry && matchesCategory && matchesPrice) {
-        const subTabsHtml = Array.isArray(course.subTabs) ? course.subTabs.map(sub => `<li>${sub}</li>`).join('') : '';
+        .ai-chat-container.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-        const courseCard = document.createElement('a');
-        courseCard.href = course.pageLink;
-        courseCard.className = 'course-card';
-        courseCard.setAttribute('data-country', course.country);
-        courseCard.setAttribute('data-category', course.category);
-        courseCard.setAttribute('data-price', course.priceTier);
-        courseCard.innerHTML = `
-          <img src="${course.logoURL}" alt="${course.title}">
-          <h2>${course.title}</h2>
-          <p>${course.description}</p>
-          <div class="price-info">Starting from €${course.startPrice}</div>
-          <div class="sub-tabs">
-            <ul>${subTabsHtml}</ul>
-          </div>
-        `;
-        courseGrid.appendChild(courseCard);
-      }
-    });
-  }
+        .ai-chat-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
 
-  async function initialize() {
-    const coursesData = await fetchCourses();
-    renderCourses(coursesData);
+        .ai-chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
 
-    searchInput.addEventListener('input', () => renderCourses(coursesData));
-    countryFilter.addEventListener('change', () => renderCourses(coursesData));
-    categoryFilter.addEventListener('change', () => renderCourses(coursesData));
-    priceFilter.addEventListener('change', () => renderCourses(coursesData));
-  }
+        .ai-chat-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-  initialize();
-</script>
+        .ai-chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-message {
+            background: var(--light-blue);
+            padding: 0.8rem 1rem;
+            border-radius: 18px 18px 18px 4px;
+            max-width: 85%;
+            align-self: flex-start;
+            font-size: 0.9rem;
+        }
+
+        .user-message {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 18px 18px 4px 18px;
+            max-width: 85%;
+            align-self: flex-end;
+            font-size: 0.9rem;
+        }
+
+        .ai-chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .ai-chat-input input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        .ai-chat-input button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
+        .ai-chat-input button:hover {
+            background: var(--secondary-blue);
+        }
+
+        .ai-chat-toggle-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0,123,255,0.4);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .filters input, .filters select {
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-light);
+            font-size: 1rem;
+            flex: 1 1 200px;
+            max-width: 250px;
+            transition: all 0.2s ease;
+        }
+
+        .filters input:focus, .filters select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+            outline: none;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--primary-blue);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: var(--lighter-blue);
+            padding: 1rem;
+        }
+
+        .course-card h2 {
+            font-size: 1.3rem;
+            margin: 1rem 1.5rem 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .course-card p {
+            font-size: 1rem;
+            margin: 0 1.5rem 1rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .price-info {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 0 1.5rem 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sub-tabs ul {
+            list-style: none;
+            padding: 0 1.5rem 1.5rem;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .sub-tabs li {
+            background: var(--light-blue);
+            color: var(--dark-blue);
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .ai-suggestions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .ai-suggestion {
+            background: var(--light-blue);
+            color: var(--dark-blue);
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--light-blue-border);
+        }
+
+        .ai-suggestion:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .course-details {
+            background: var(--lighter-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .course-details h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--dark-blue);
+        }
+
+        .course-details p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .ai-chat-container {
+                width: 90vw;
+                right: 5vw;
+                left: 5vw;
+            }
+            
+            .grid-header h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filters input, .filters select {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-header">
+        <h1>🎓 EuroLynk Course Directory</h1>
+        <p>AI-Powered Course Discovery Platform</p>
+    </div>
+
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="Search courses...">
+        <select id="countryFilter">
+            <option value="">All Countries</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Italy">Italy</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Spain">Spain</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Austria">Austria</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Finland">Finland</option>
+            <option value="Poland">Poland</option>
+            <option value="Greece">Greece</option>
+            <option value="Czech Republic">Czech Republic</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Romania">Romania</option>
+            <option value="Bulgaria">Bulgaria</option>
+        </select>
+        <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Interview">Interview</option>
+            <option value="CV">CV</option>
+            <option value="Medical">Medical</option>
+            <option value="Corporate">Corporate</option>
+            <option value="IT">IT</option>
+            <option value="Language">Language</option>
+        </select>
+        <select id="priceFilter">
+            <option value="">All Prices</option>
+            <option value="low">Under €100</option>
+            <option value="mid">€100 - €300</option>
+            <option value="high">Above €300</option>
+        </select>
+    </div>
+
+    <div class="course-grid" id="courseGrid">
+        <!-- Courses will be loaded dynamically here -->
+    </div>
+
+    <!-- AI Chat Toggle Button -->
+    <button class="ai-chat-toggle-btn" id="aiChatToggle" title="Ask AI about courses">
+        🤖
+    </button>
+
+    <!-- AI Chat Container -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header" id="aiChatHeader">
+            <h3>🎓 Course AI Assistant</h3>
+            <button class="ai-chat-toggle" id="aiChatClose">×</button>
+        </div>
+        <div class="ai-chat-messages" id="aiChatMessages">
+            <div class="ai-message">
+                Hello! I'm your AI course assistant. I can help you find courses, compare prices, and answer questions about:
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li>Course details and pricing</li>
+                    <li>Country-specific recommendations</li>
+                    <li>Category comparisons</li>
+                    <li>Provider information</li>
+                </ul>
+                <div class="ai-suggestions">
+                    <div class="ai-suggestion" onclick="askAI('What courses do you have?')">What courses do you have?</div>
+                    <div class="ai-suggestion" onclick="askAI('Show me the cheapest courses')">Show me the cheapest courses</div>
+                    <div class="ai-suggestion" onclick="askAI('What are the best CV courses?')">Best CV courses</div>
+                    <div class="ai-suggestion" onclick="askAI('Courses in Germany')">Courses in Germany</div>
+                </div>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="aiChatInput" placeholder="Ask me about courses..." onkeypress="handleAIInput(event)">
+            <button onclick="sendAIMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let coursesData = [];
+        let aiChatOpen = false;
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const countryFilter = document.getElementById('countryFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const priceFilter = document.getElementById('priceFilter');
+        const courseGrid = document.getElementById('courseGrid');
+        const aiChatToggle = document.getElementById('aiChatToggle');
+        const aiChatContainer = document.getElementById('aiChatContainer');
+        const aiChatHeader = document.getElementById('aiChatHeader');
+        const aiChatClose = document.getElementById('aiChatClose');
+        const aiChatMessages = document.getElementById('aiChatMessages');
+        const aiChatInput = document.getElementById('aiChatInput');
+
+        // AI Chat functionality
+        aiChatToggle.addEventListener('click', toggleAIChat);
+        aiChatHeader.addEventListener('click', toggleAIChat);
+        aiChatClose.addEventListener('click', closeAIChat);
+
+        function toggleAIChat() {
+            aiChatOpen = !aiChatOpen;
+            if (aiChatOpen) {
+                aiChatContainer.classList.add('open');
+                aiChatInput.focus();
+            } else {
+                aiChatContainer.classList.remove('open');
+            }
+        }
+
+        function closeAIChat() {
+            aiChatOpen = false;
+            aiChatContainer.classList.remove('open');
+        }
+
+        function handleAIInput(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        function sendAIMessage() {
+            const message = aiChatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            aiChatInput.value = '';
+
+            // Process with AI
+            processAIQuery(message);
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
+            messageDiv.innerHTML = text;
+            aiChatMessages.appendChild(messageDiv);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+
+        function addLoadingMessage() {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'ai-message';
+            loadingDiv.id = 'loadingMessage';
+            loadingDiv.innerHTML = '<div class="loading"></div> Processing...';
+            aiChatMessages.appendChild(loadingDiv);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+
+        function removeLoadingMessage() {
+            const loadingMessage = document.getElementById('loadingMessage');
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+        }
+
+        // AI Processing Functions
+        function processAIQuery(query) {
+            addLoadingMessage();
+            
+            // Simulate AI processing time
+            setTimeout(() => {
+                removeLoadingMessage();
+                const response = generateAIResponse(query);
+                addMessage(response, 'ai');
+            }, 1000);
+        }
+
+        function generateAIResponse(query) {
+            const lowerQuery = query.toLowerCase();
+            
+            // Course listing queries
+            if (lowerQuery.includes('what courses') || lowerQuery.includes('show courses') || lowerQuery.includes('list courses')) {
+                return generateCourseListResponse();
+            }
+            
+            // Price-related queries
+            if (lowerQuery.includes('price') || lowerQuery.includes('cost') || lowerQuery.includes('cheap') || lowerQuery.includes('expensive')) {
+                return generatePriceResponse(lowerQuery);
+            }
+            
+            // Country-specific queries
+            const countryMatch = extractCountry(lowerQuery);
+            if (countryMatch) {
+                return generateCountryResponse(countryMatch);
+            }
+            
+            // Category-specific queries
+            const categoryMatch = extractCategory(lowerQuery);
+            if (categoryMatch) {
+                return generateCategoryResponse(categoryMatch);
+            }
+            
+            // Provider queries
+            if (lowerQuery.includes('provider') || lowerQuery.includes('company') || lowerQuery.includes('institute')) {
+                return generateProviderResponse();
+            }
+            
+            // Specific course queries
+            if (lowerQuery.includes('cv') || lowerQuery.includes('interview') || lowerQuery.includes('medical') || 
+                lowerQuery.includes('corporate') || lowerQuery.includes('it') || lowerQuery.includes('language')) {
+                return generateSpecificCourseResponse(lowerQuery);
+            }
+            
+            // Default response
+            return generateDefaultResponse();
+        }
+
+        function generateCourseListResponse() {
+            const totalCourses = coursesData.length;
+            const categories = [...new Set(coursesData.map(c => c.category))];
+            const countries = [...new Set(coursesData.map(c => c.country))];
+            
+            let response = `I have <strong>${totalCourses} courses</strong> available across <strong>${categories.length} categories</strong> in <strong>${countries.length} countries</strong>!<br><br>`;
+            
+            response += '<strong>Categories:</strong><br>';
+            categories.forEach(category => {
+                const count = coursesData.filter(c => c.category === category).length;
+                response += `• ${category}: ${count} courses<br>`;
+            });
+            
+            response += '<br><strong>Countries:</strong><br>';
+            countries.slice(0, 8).forEach(country => {
+                const count = coursesData.filter(c => c.country === country).length;
+                response += `• ${country}: ${count} courses<br>`;
+            });
+            
+            if (countries.length > 8) {
+                response += `• And ${countries.length - 8} more countries<br>`;
+            }
+            
+            response += '<br>What specific type of course are you looking for?';
+            
+            return response;
+        }
+
+        function generatePriceResponse(query) {
+            if (query.includes('cheap') || query.includes('lowest') || query.includes('budget')) {
+                const cheapestCourses = coursesData
+                    .sort((a, b) => a.startPrice - b.startPrice)
+                    .slice(0, 5);
+                
+                let response = '<strong>Most Affordable Courses:</strong><br><br>';
+                cheapestCourses.forEach(course => {
+                    response += `<div class="course-details">
+                        <h4>${course.title}</h4>
+                        <p><strong>Price:</strong> €${course.startPrice}</p>
+                        <p><strong>Country:</strong> ${course.country}</p>
+                        <p><strong>Category:</strong> ${course.category}</p>
+                    </div>`;
+                });
+                
+                return response;
+            }
+            
+            if (query.includes('expensive') || query.includes('highest') || query.includes('premium')) {
+                const expensiveCourses = coursesData
+                    .sort((a, b) => b.startPrice - a.startPrice)
+                    .slice(0, 5);
+                
+                let response = '<strong>Premium Courses:</strong><br><br>';
+                expensiveCourses.forEach(course => {
+                    response += `<div class="course-details">
+                        <h4>${course.title}</h4>
+                        <p><strong>Price:</strong> €${course.startPrice}</p>
+                        <p><strong>Country:</strong> ${course.country}</p>
+                        <p><strong>Category:</strong> ${course.category}</p>
+                    </div>`;
+                });
+                
+                return response;
+            }
+            
+            // General price information
+            const priceRanges = {
+                low: coursesData.filter(c => c.priceTier === 'low').length,
+                mid: coursesData.filter(c => c.priceTier === 'mid').length,
+                high: coursesData.filter(c => c.priceTier === 'high').length
+            };
+            
+            const avgPrice = Math.round(coursesData.reduce((sum, c) => sum + c.startPrice, 0) / coursesData.length);
+            
+            let response = `<strong>Price Overview:</strong><br><br>`;
+            response += `• Budget-friendly (under €100): <strong>${priceRanges.low}</strong> courses<br>`;
+            response += `• Mid-range (€100-€300): <strong>${priceRanges.mid}</strong> courses<br>`;
+            response += `• Premium (above €300): <strong>${priceRanges.high}</strong> courses<br><br>`;
+            response += `Average course price: <strong>€${avgPrice}</strong><br><br>`;
+            response += 'Would you like to see courses in a specific price range?';
+            
+            return response;
+        }
+
+        function generateCountryResponse(country) {
+            const countryCourses = coursesData.filter(c => 
+                c.country.toLowerCase().includes(country.toLowerCase())
+            );
+            
+            if (countryCourses.length === 0) {
+                return `I don't have any courses in ${country} at the moment. Would you like to see courses from other countries?`;
+            }
+            
+            let response = `<strong>Courses in ${country}:</strong><br><br>`;
+            
+            countryCourses.forEach(course => {
+                response += `<div class="course-details">
+                    <h4>${course.title}</h4>
+                    <p><strong>Price:</strong> €${course.startPrice}</p>
+                    <p><strong>Category:</strong> ${course.category}</p>
+                    <p><strong>Duration:</strong> ${course.duration}</p>
+                    <p><strong>Format:</strong> ${course.format}</p>
+                </div>`;
+            });
+            
+            return response;
+        }
+
+        function generateCategoryResponse(category) {
+            const categoryCourses = coursesData.filter(c => 
+                c.category.toLowerCase().includes(category.toLowerCase())
+            );
+            
+            if (categoryCourses.length === 0) {
+                return `I don't have any ${category} courses at the moment. Available categories are: CV, Interview, Medical, Corporate, IT, and Language.`;
+            }
+            
+            let response = `<strong>${category} Courses:</strong><br><br>`;
+            
+            categoryCourses.forEach(course => {
+                response += `<div class="course-details">
+                    <h4>${course.title}</h4>
+                    <p><strong>Price:</strong> €${course.startPrice}</p>
+                    <p><strong>Country:</strong> ${course.country}</p>
+                    <p><strong>Duration:</strong> ${course.duration}</p>
+                    <p><strong>Rating:</strong> ⭐ ${course.rating}/5 (${course.totalReviews} reviews)</p>
+                </div>`;
+            });
+            
+            return response;
+        }
+
+        function generateProviderResponse() {
+            const providers = [...new Set(coursesData.map(c => c.provider?.name).filter(Boolean))];
+            
+            let response = '<strong>Course Providers:</strong><br><br>';
+            providers.forEach(provider => {
+                const providerCourses = coursesData.filter(c => c.provider?.name === provider);
+                response += `<div class="course-details">
+                    <h4>${provider}</h4>
+                    <p><strong>Courses:</strong> ${providerCourses.length}</p>
+                    <p><strong>Description:</strong> ${providerCourses[0].provider.description}</p>
+                </div>`;
+            });
+            
+            return response;
+        }
+
+        function generateSpecificCourseResponse(query) {
+            let category = '';
+            if (query.includes('cv')) category = 'CV';
+            else if (query.includes('interview')) category = 'Interview';
+            else if (query.includes('medical')) category = 'Medical';
+            else if (query.includes('corporate')) category = 'Corporate';
+            else if (query.includes('it')) category = 'IT';
+            else if (query.includes('language')) category = 'Language';
+            
+            if (category) {
+                return generateCategoryResponse(category);
+            }
+            
+            return generateDefaultResponse();
+        }
+
+        function generateDefaultResponse() {
+            return `I can help you with:<br><br>
+            • <strong>Course information:</strong> Ask about specific courses, categories, or countries<br>
+            • <strong>Pricing:</strong> Find affordable or premium courses<br>
+            • <strong>Recommendations:</strong> Get personalized course suggestions<br>
+            • <strong>Provider details:</strong> Learn about course providers<br><br>
+            Try asking: "What CV courses do you have?" or "Show me courses in Germany"`;
+        }
+
+        function extractCountry(query) {
+            const countries = ['germany', 'france', 'italy', 'netherlands', 'spain', 'belgium', 'sweden', 'austria', 'portugal', 'ireland', 'denmark', 'finland', 'poland', 'greece', 'czech republic', 'hungary', 'romania', 'bulgaria'];
+            
+            for (const country of countries) {
+                if (query.includes(country)) {
+                    return country;
+                }
+            }
+            return null;
+        }
+
+        function extractCategory(query) {
+            const categories = ['cv', 'interview', 'medical', 'corporate', 'it', 'language'];
+            
+            for (const category of categories) {
+                if (query.includes(category)) {
+                    return category;
+                }
+            }
+            return null;
+        }
+
+        function askAI(question) {
+            aiChatInput.value = question;
+            sendAIMessage();
+        }
+
+        // Course rendering functions
+        async function fetchCourses() {
+            try {
+                const response = await fetch('https://eurolynk.github.io/eurolynk-data/courses.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+                // Fallback to local data if available
+                return [];
+            }
+        }
+
+        function renderCourses(coursesData) {
+            courseGrid.innerHTML = '';
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedCountry = countryFilter.value;
+            const selectedCategory = categoryFilter.value;
+            const selectedPrice = priceFilter.value;
+
+            coursesData.forEach(course => {
+                const matchesSearch = course.title.toLowerCase().includes(searchTerm) || 
+                                   course.description.toLowerCase().includes(searchTerm);
+                const matchesCountry = !selectedCountry || course.country === selectedCountry;
+                const matchesCategory = !selectedCategory || course.category === selectedCategory;
+                const matchesPrice = !selectedPrice || course.priceTier === selectedPrice;
+
+                if (matchesSearch && matchesCountry && matchesCategory && matchesPrice) {
+                    const subTabsHtml = Array.isArray(course.subTabs) ? course.subTabs.map(sub => `<li>${sub}</li>`).join('') : '';
+
+                    const courseCard = document.createElement('a');
+                    courseCard.href = course.pageLink;
+                    courseCard.className = 'course-card';
+                    courseCard.setAttribute('data-country', course.country);
+                    courseCard.setAttribute('data-category', course.category);
+                    courseCard.setAttribute('data-price', course.priceTier);
+                    courseCard.innerHTML = `
+                        <img src="${course.logoURL}" alt="${course.title}">
+                        <h2>${course.title}</h2>
+                        <p>${course.description}</p>
+                        <div class="price-info">Starting from €${course.startPrice}</div>
+                        <div class="sub-tabs">
+                            <ul>${subTabsHtml}</ul>
+                        </div>
+                    `;
+                    courseGrid.appendChild(courseCard);
+                }
+            });
+        }
+
+        async function initialize() {
+            coursesData = await fetchCourses();
+            renderCourses(coursesData);
+
+            searchInput.addEventListener('input', () => renderCourses(coursesData));
+            countryFilter.addEventListener('change', () => renderCourses(coursesData));
+            categoryFilter.addEventListener('change', () => renderCourses(coursesData));
+            priceFilter.addEventListener('change', () => renderCourses(coursesData));
+        }
+
+        // Initialize the application
+        initialize();
+    </script>
+</body>
+</html>
