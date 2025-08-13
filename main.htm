@@ -1,213 +1,1899 @@
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9fafb;
-    color: #333;
-    margin: 0;
-    padding: 0;
-  }
-  .grid-header {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(90deg, #007BFF, #00C6FF);
-    color: white;
-    border-bottom: 4px solid #005bb5;
-  }
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    border-radius: 12px;
-    margin: 1rem auto;
-    width: 90%;
-    max-width: 1200px;
-  }
-  .filters input, .filters select {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    flex: 1 1 200px;
-    max-width: 250px;
-  }
-  .course-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
-    width: 90%;
-    max-width: 1300px;
-    margin: auto;
-  }
-  .course-card {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-  .course-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: contain;
-    background: #f1f1f1;
-    padding: 10px;
-  }
-  .course-card h2 {
-    font-size: 1.2rem;
-    margin: 0.5rem 1rem 0;
-  }
-  .course-card p {
-    font-size: 0.95rem;
-    margin: 0.5rem 1rem 1rem;
-    color: #555;
-  }
-  .price-info {
-    font-weight: bold;
-    color: #007BFF;
-    margin: 0 1rem 1rem;
-  }
-  .sub-tabs ul {
-    list-style: none;
-    padding: 0 1rem 1rem;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .sub-tabs li {
-    background: #e6f0ff;
-    color: #005bb5;
-    padding: 0.3rem 0.7rem;
-    border-radius: 8px;
-    font-size: 0.8rem;
-  }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuroLynk Course Directory - AI-Powered Course Finder</title>
+    <meta name="description" content="AI-powered course discovery platform. Find and compare courses across Europe with intelligent search and recommendations.">
 
-<div class="grid-header">
-  <h1>EuroLynk Course Directory</h1>
-</div>
+    
+    <style>
+        :root {
+            --primary-blue: #007BFF;
+            --secondary-blue: #0056D2;
+            --light-blue: #E3F2FD;
+            --lighter-blue: #F0F8FF;
+            --dark-blue: #005bb5;
+            --navy-blue: #1e3a8a;
+            --accent-blue: #3b82f6;
+            --light-blue-border: #BBDEFB;
+            --red: #dc2626;
+            --dark-red: #b91c1c;
+            --gray-bg: #f8fafc;
+            --white: #ffffff;
+            --text-dark: #1f2937;
+            --text-medium: #6b7280;
+            --border-light: #e5e7eb;
+            --shadow-light: rgba(0,0,0,0.04);
+            --shadow-medium: rgba(0,0,0,0.1);
+            --shadow-heavy: rgba(0,0,0,0.25);
+        }
 
-<div class="filters">
-  <input type="text" id="searchInput" placeholder="Search courses...">
-  <select id="countryFilter">
-    <option value="">All Countries</option>
-    <option value="Germany">Germany</option>
-    <option value="France">France</option>
-    <option value="Italy">Italy</option>
-    <option value="Netherlands">Netherlands</option>
-    <option value="Spain">Spain</option>
-    <option value="Belgium">Belgium</option>
-    <option value="Sweden">Sweden</option>
-    <option value="Austria">Austria</option>
-    <option value="Portugal">Portugal</option>
-    <option value="Ireland">Ireland</option>
-    <option value="Denmark">Denmark</option>
-    <option value="Finland">Finland</option>
-    <option value="Poland">Poland</option>
-    <option value="Greece">Greece</option>
-    <option value="Czech Republic">Czech Republic</option>
-    <option value="Hungary">Hungary</option>
-    <option value="Romania">Romania</option>
-    <option value="Bulgaria">Bulgaria</option>
-  </select>
-  <select id="categoryFilter">
-    <option value="">All Categories</option>
-    <option value="Interview">Interview</option>
-    <option value="CV">CV</option>
-    <option value="Medical">Medical</option>
-    <option value="Corporate">Corporate</option>
-    <option value="IT">IT</option>
-    <option value="Language">Language</option>
-  </select>
-  <select id="priceFilter">
-    <option value="">All Prices</option>
-    <option value="low">Under €100</option>
-    <option value="mid">€100 - €300</option>
-    <option value="high">Above €300</option>
-  </select>
-</div>
+        * {
+            box-sizing: border-box;
+        }
 
-<div class="course-grid" id="courseGrid">
-  <!-- Courses will be loaded dynamically here -->
-</div>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gray-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
 
-<script>
-  const searchInput = document.getElementById('searchInput');
-  const countryFilter = document.getElementById('countryFilter');
-  const categoryFilter = document.getElementById('categoryFilter');
-  const priceFilter = document.getElementById('priceFilter');
-  const courseGrid = document.getElementById('courseGrid');
+        .grid-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-  async function fetchCourses() {
-    try {
-      const response = await fetch('https://eurolynk.github.io/eurolynk-data/courses.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error('Error fetching courses:', error);
-      return [];
-    }
-  }
+        .grid-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
 
-  function renderCourses(coursesData) {
-    courseGrid.innerHTML = '';
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedCountry = countryFilter.value;
-    const selectedCategory = categoryFilter.value;
-    const selectedPrice = priceFilter.value;
+        .grid-header h1 {
+            font-size: 3rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
 
-    coursesData.forEach(course => {
-      const matchesSearch = course.title.toLowerCase().includes(searchTerm);
-      const matchesCountry = !selectedCountry || course.country === selectedCountry;
-      const matchesCategory = !selectedCategory || course.category === selectedCategory;
-      const matchesPrice = !selectedPrice || course.priceTier === selectedPrice;
+        .grid-header p {
+            font-size: 1.2rem;
+            margin: 1rem 0 0;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
 
-      if (matchesSearch && matchesCountry && matchesCategory && matchesPrice) {
-        const subTabsHtml = Array.isArray(course.subTabs) ? course.subTabs.map(sub => `<li>${sub}</li>`).join('') : '';
+        .ai-chat-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 400px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            transform: translateY(100%);
+            opacity: 0;
+        }
 
-        const courseCard = document.createElement('a');
-        courseCard.href = course.pageLink;
-        courseCard.className = 'course-card';
-        courseCard.setAttribute('data-country', course.country);
-        courseCard.setAttribute('data-category', course.category);
-        courseCard.setAttribute('data-price', course.priceTier);
-        courseCard.innerHTML = `
-          <img src="${course.logoURL}" alt="${course.title}">
-          <h2>${course.title}</h2>
-          <p>${course.description}</p>
-          <div class="price-info">Starting from €${course.startPrice}</div>
-          <div class="sub-tabs">
-            <ul>${subTabsHtml}</ul>
-          </div>
-        `;
-        courseGrid.appendChild(courseCard);
-      }
-    });
-  }
+        .ai-chat-container.open {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
-  async function initialize() {
-    const coursesData = await fetchCourses();
-    renderCourses(coursesData);
+        .ai-chat-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
 
-    searchInput.addEventListener('input', () => renderCourses(coursesData));
-    countryFilter.addEventListener('change', () => renderCourses(coursesData));
-    categoryFilter.addEventListener('change', () => renderCourses(coursesData));
-    priceFilter.addEventListener('change', () => renderCourses(coursesData));
-  }
+        .ai-chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
 
-  initialize();
-</script>
+        .ai-chat-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-message {
+            background: var(--light-blue);
+            padding: 0.8rem 1rem;
+            border-radius: 18px 18px 18px 4px;
+            max-width: 85%;
+            align-self: flex-start;
+            font-size: 0.9rem;
+        }
+
+        .user-message {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 1rem;
+            border-radius: 18px 18px 4px 18px;
+            max-width: 85%;
+            align-self: flex-end;
+            font-size: 0.9rem;
+        }
+
+        .ai-chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .ai-chat-input input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+
+        .ai-chat-input button {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease;
+        }
+
+        .ai-chat-input button:hover {
+            background: var(--secondary-blue);
+        }
+
+        .ai-chat-toggle-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,123,255,0.3);
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0,123,255,0.4);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-radius: 16px;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .filters input, .filters select {
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 2px solid var(--border-light);
+            font-size: 1rem;
+            flex: 1 1 200px;
+            max-width: 250px;
+            transition: all 0.2s ease;
+        }
+
+        .filters input:focus, .filters select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+            outline: none;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border-color: var(--primary-blue);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: var(--lighter-blue);
+            padding: 1rem;
+        }
+
+        .course-card h2 {
+            font-size: 1.3rem;
+            margin: 1rem 1.5rem 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .course-card p {
+            font-size: 1rem;
+            margin: 0 1.5rem 1rem;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .price-info {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin: 0 1.5rem 1rem;
+            font-size: 1.1rem;
+        }
+
+        .sub-tabs ul {
+            list-style: none;
+            padding: 0 1.5rem 1.5rem;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .sub-tabs li {
+            background: var(--light-blue);
+            color: var(--dark-blue);
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .course-card .badges {
+            margin: 0 1.5rem 1rem;
+        }
+
+        .course-card .badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            margin: 0.2rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        .modal .badge {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            margin: 0.2rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Course Modal Styles */
+        .course-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            z-index: 1000;
+        }
+
+        .course-modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 42rem;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-modal-body {
+            padding: 1.5rem;
+        }
+
+        .course-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .course-modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .course-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .course-modal-close:hover {
+            color: #6b7280;
+        }
+
+        .course-modal-image-section {
+            margin-bottom: 1rem;
+        }
+
+        .course-modal-image {
+            width: 8rem;
+            height: 5rem;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .course-modal-badges {
+            margin-bottom: 0.75rem;
+        }
+
+        .course-modal-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .course-detail-item {
+            color: var(--text-dark);
+        }
+
+        .course-modal-section {
+            margin-bottom: 1rem;
+        }
+
+        .course-modal-section-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-modal-text {
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .course-modal-text-small {
+            color: var(--text-medium);
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .course-modal-list {
+            list-style: disc;
+            padding-left: 1.5rem;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .course-modal-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .course-modal-button-primary {
+            background: var(--text-dark);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .course-modal-button-primary:hover {
+            background: #374151;
+        }
+
+        .course-modal-button-secondary {
+            border: 1px solid var(--border-light);
+            color: var(--text-medium);
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .course-modal-button-secondary:hover {
+            background: var(--gray-bg);
+        }
+
+        @media (max-width: 768px) {
+            .course-modal-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-modal-actions {
+                flex-direction: column;
+            }
+        }
+
+        .ai-suggestions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .ai-suggestion {
+            background: var(--light-blue);
+            color: var(--dark-blue);
+            padding: 0.4rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--light-blue-border);
+        }
+
+        .ai-suggestion:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .course-details {
+            background: var(--lighter-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .course-details h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--dark-blue);
+        }
+
+        .course-details p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .ai-chat-container {
+                width: 90vw;
+                right: 5vw;
+                left: 5vw;
+            }
+            
+            .grid-header h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filters input, .filters select {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-header">
+        <h1>🎓 EuroLynk Course Directory</h1>
+        <p>AI-Powered Course Discovery Platform</p>
+    </div>
+
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="Search courses...">
+        <select id="countryFilter">
+            <option value="">All Countries</option>
+            <option value="Germany">Germany</option>
+            <option value="France">France</option>
+            <option value="Italy">Italy</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Spain">Spain</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Sweden">Sweden</option>
+            <option value="Austria">Austria</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Finland">Finland</option>
+            <option value="Poland">Poland</option>
+            <option value="Greece">Greece</option>
+            <option value="Czech Republic">Czech Republic</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Romania">Romania</option>
+            <option value="Bulgaria">Bulgaria</option>
+        </select>
+        <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Interview">Interview</option>
+            <option value="CV">CV</option>
+            <option value="Medical">Medical</option>
+            <option value="Corporate">Corporate</option>
+            <option value="IT">IT</option>
+            <option value="Language">Language</option>
+        </select>
+        <select id="priceFilter">
+            <option value="">Any Price</option>
+            <option value="low">Under €100</option>
+            <option value="mid">€100 - €300</option>
+            <option value="high">Above €300</option>
+        </select>
+        <select id="durationFilter">
+            <option value="">Any Duration</option>
+            <option value="1 week">1 week</option>
+            <option value="2 weeks">2 weeks</option>
+            <option value="1-2 weeks">1-2 weeks</option>
+            <option value="3-4 weeks">3-4 weeks</option>
+            <option value="1-2 months">1-2 months</option>
+            <option value="3-6 months">3-6 months</option>
+            <option value="6+ months">6+ months</option>
+        </select>
+        <select id="formatFilter">
+            <option value="">Any Format</option>
+            <option value="Online">Online</option>
+            <option value="In-Person">In-Person</option>
+            <option value="Hybrid">Hybrid</option>
+        </select>
+        <select id="ratingFilter">
+            <option value="">Any Rating</option>
+            <option value="4.5">4.5+ Stars</option>
+            <option value="4.0">4.0+ Stars</option>
+            <option value="3.5">3.5+ Stars</option>
+        </select>
+        <select id="sortFilter">
+            <option value="">Sort by</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Highest Rated</option>
+            <option value="reviews">Most Reviews</option>
+        </select>
+    </div>
+
+    <div class="course-grid" id="courseGrid">
+        <!-- Courses will be loaded dynamically here -->
+    </div>
+
+    <!-- AI Chat Toggle Button -->
+    <button class="ai-chat-toggle-btn" id="aiChatToggle" title="Ask AI about courses">
+        🤖
+    </button>
+
+    <!-- AI Chat Container -->
+    <div class="ai-chat-container" id="aiChatContainer">
+        <div class="ai-chat-header" id="aiChatHeader">
+            <h3>🎓 Course AI Assistant</h3>
+            <button class="ai-chat-toggle" id="aiChatClose">×</button>
+        </div>
+        <div class="ai-chat-messages" id="aiChatMessages">
+            <div class="ai-message">
+                Hello! I'm your AI course assistant. I can help you find courses, compare prices, and answer questions about:
+                <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                    <li>Course details and pricing</li>
+                    <li>Country-specific recommendations</li>
+                    <li>Category comparisons</li>
+                    <li>Provider information</li>
+                </ul>
+                <div class="ai-suggestions">
+                    <div class="ai-suggestion" onclick="askAI('What courses do you have?')">What courses do you have?</div>
+                    <div class="ai-suggestion" onclick="askAI('Show me the cheapest courses')">Show me the cheapest courses</div>
+                    <div class="ai-suggestion" onclick="askAI('What are the best CV courses?')">Best CV courses</div>
+                    <div class="ai-suggestion" onclick="askAI('Courses in Germany')">Courses in Germany</div>
+                </div>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="aiChatInput" placeholder="Ask me about courses..." onkeypress="handleAIInput(event)">
+            <button onclick="sendAIMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let coursesData = [];
+        let aiChatOpen = false;
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const countryFilter = document.getElementById('countryFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const priceFilter = document.getElementById('priceFilter');
+        const durationFilter = document.getElementById('durationFilter');
+        const formatFilter = document.getElementById('formatFilter');
+        const ratingFilter = document.getElementById('ratingFilter');
+        const sortFilter = document.getElementById('sortFilter');
+        const courseGrid = document.getElementById('courseGrid');
+        const aiChatToggle = document.getElementById('aiChatToggle');
+        const aiChatContainer = document.getElementById('aiChatContainer');
+        const aiChatHeader = document.getElementById('aiChatHeader');
+        const aiChatClose = document.getElementById('aiChatClose');
+        const aiChatMessages = document.getElementById('aiChatMessages');
+        const aiChatInput = document.getElementById('aiChatInput');
+
+        // AI Chat functionality
+        aiChatToggle.addEventListener('click', toggleAIChat);
+        aiChatHeader.addEventListener('click', toggleAIChat);
+        aiChatClose.addEventListener('click', closeAIChat);
+
+        function toggleAIChat() {
+            aiChatOpen = !aiChatOpen;
+            if (aiChatOpen) {
+                aiChatContainer.classList.add('open');
+                aiChatInput.focus();
+            } else {
+                aiChatContainer.classList.remove('open');
+            }
+        }
+
+        function closeAIChat() {
+            aiChatOpen = false;
+            aiChatContainer.classList.remove('open');
+        }
+
+        function handleAIInput(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
+
+        function sendAIMessage() {
+            const message = aiChatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            aiChatInput.value = '';
+
+            // Process with AI
+            processAIQuery(message);
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
+            messageDiv.innerHTML = text;
+            aiChatMessages.appendChild(messageDiv);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+
+        function addLoadingMessage() {
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'ai-message';
+            loadingDiv.id = 'loadingMessage';
+            loadingDiv.innerHTML = '<div class="loading"></div> Processing...';
+            aiChatMessages.appendChild(loadingDiv);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        }
+
+        function removeLoadingMessage() {
+            const loadingMessage = document.getElementById('loadingMessage');
+            if (loadingMessage) {
+                loadingMessage.remove();
+            }
+        }
+
+        // AI Processing Functions
+        function processAIQuery(query) {
+            addLoadingMessage();
+            
+            // Simulate AI processing time
+            setTimeout(() => {
+                removeLoadingMessage();
+                const response = generateAIResponse(query);
+                addMessage(response, 'ai');
+            }, 1000);
+        }
+
+        function generateAIResponse(query) {
+            const lowerQuery = query.toLowerCase();
+            
+            // Course listing queries
+            if (lowerQuery.includes('what courses') || lowerQuery.includes('show courses') || lowerQuery.includes('list courses')) {
+                return generateCourseListResponse();
+            }
+            
+            // Price-related queries
+            if (lowerQuery.includes('price') || lowerQuery.includes('cost') || lowerQuery.includes('cheap') || lowerQuery.includes('expensive')) {
+                return generatePriceResponse(lowerQuery);
+            }
+            
+            // Country-specific queries
+            const countryMatch = extractCountry(lowerQuery);
+            if (countryMatch) {
+                return generateCountryResponse(countryMatch);
+            }
+            
+            // Category-specific queries
+            const categoryMatch = extractCategory(lowerQuery);
+            if (categoryMatch) {
+                return generateCategoryResponse(categoryMatch);
+            }
+            
+            // Provider queries
+            if (lowerQuery.includes('provider') || lowerQuery.includes('company') || lowerQuery.includes('institute')) {
+                return generateProviderResponse();
+            }
+            
+            // Specific course queries
+            if (lowerQuery.includes('cv') || lowerQuery.includes('interview') || lowerQuery.includes('medical') || 
+                lowerQuery.includes('corporate') || lowerQuery.includes('it') || lowerQuery.includes('language')) {
+                return generateSpecificCourseResponse(lowerQuery);
+            }
+            
+            // Default response
+            return generateDefaultResponse();
+        }
+
+        function generateCourseListResponse() {
+            const totalCourses = coursesData.length;
+            const categories = [...new Set(coursesData.map(c => c.category))];
+            const countries = [...new Set(coursesData.map(c => c.country))];
+            
+            let response = `I have <strong>${totalCourses} courses</strong> available across <strong>${categories.length} categories</strong> in <strong>${countries.length} countries</strong>!<br><br>`;
+            
+            response += '<strong>Categories:</strong><br>';
+            categories.forEach(category => {
+                const count = coursesData.filter(c => c.category === category).length;
+                response += `• ${category}: ${count} courses<br>`;
+            });
+            
+            response += '<br><strong>Countries:</strong><br>';
+            countries.slice(0, 8).forEach(country => {
+                const count = coursesData.filter(c => c.country === country).length;
+                response += `• ${country}: ${count} courses<br>`;
+            });
+            
+            if (countries.length > 8) {
+                response += `• And ${countries.length - 8} more countries<br>`;
+            }
+            
+            response += '<br>What specific type of course are you looking for?';
+            
+            return response;
+        }
+
+        function generatePriceResponse(query) {
+            if (query.includes('cheap') || query.includes('lowest') || query.includes('budget')) {
+                const cheapestCourses = coursesData
+                    .sort((a, b) => a.startPrice - b.startPrice)
+                    .slice(0, 5);
+                
+                let response = '<strong>Most Affordable Courses:</strong><br><br>';
+                cheapestCourses.forEach(course => {
+                    response += `<div class="course-details">
+                        <h4>${course.title}</h4>
+                        <p><strong>Price:</strong> €${course.startPrice}</p>
+                        <p><strong>Country:</strong> ${course.country}</p>
+                        <p><strong>Category:</strong> ${course.category}</p>
+                    </div>`;
+                });
+                
+                return response;
+            }
+            
+            if (query.includes('expensive') || query.includes('highest') || query.includes('premium')) {
+                const expensiveCourses = coursesData
+                    .sort((a, b) => b.startPrice - a.startPrice)
+                    .slice(0, 5);
+                
+                let response = '<strong>Premium Courses:</strong><br><br>';
+                expensiveCourses.forEach(course => {
+                    response += `<div class="course-details">
+                        <h4>${course.title}</h4>
+                        <p><strong>Price:</strong> €${course.startPrice}</p>
+                        <p><strong>Country:</strong> ${course.country}</p>
+                        <p><strong>Category:</strong> ${course.category}</p>
+                    </div>`;
+                });
+                
+                return response;
+            }
+            
+            // General price information
+            const priceRanges = {
+                low: coursesData.filter(c => c.priceTier === 'low').length,
+                mid: coursesData.filter(c => c.priceTier === 'mid').length,
+                high: coursesData.filter(c => c.priceTier === 'high').length
+            };
+            
+            const avgPrice = Math.round(coursesData.reduce((sum, c) => sum + c.startPrice, 0) / coursesData.length);
+            
+            let response = `<strong>Price Overview:</strong><br><br>`;
+            response += `• Budget-friendly (under €100): <strong>${priceRanges.low}</strong> courses<br>`;
+            response += `• Mid-range (€100-€300): <strong>${priceRanges.mid}</strong> courses<br>`;
+            response += `• Premium (above €300): <strong>${priceRanges.high}</strong> courses<br><br>`;
+            response += `Average course price: <strong>€${avgPrice}</strong><br><br>`;
+            response += 'Would you like to see courses in a specific price range?';
+            
+            return response;
+        }
+
+        function generateCountryResponse(country) {
+            const countryCourses = coursesData.filter(c => 
+                c.country.toLowerCase().includes(country.toLowerCase())
+            );
+            
+            if (countryCourses.length === 0) {
+                return `I don't have any courses in ${country} at the moment. Would you like to see courses from other countries?`;
+            }
+            
+            let response = `<strong>Courses in ${country}:</strong><br><br>`;
+            
+            countryCourses.forEach(course => {
+                response += `<div class="course-details">
+                    <h4>${course.title}</h4>
+                    <p><strong>Price:</strong> €${course.startPrice}</p>
+                    <p><strong>Category:</strong> ${course.category}</p>
+                    <p><strong>Duration:</strong> ${course.duration}</p>
+                    <p><strong>Format:</strong> ${course.format}</p>
+                </div>`;
+            });
+            
+            return response;
+        }
+
+        function generateCategoryResponse(category) {
+            const categoryCourses = coursesData.filter(c => 
+                c.category.toLowerCase().includes(category.toLowerCase())
+            );
+            
+            if (categoryCourses.length === 0) {
+                return `I don't have any ${category} courses at the moment. Available categories are: CV, Interview, Medical, Corporate, IT, and Language.`;
+            }
+            
+            let response = `<strong>${category} Courses:</strong><br><br>`;
+            
+            categoryCourses.forEach(course => {
+                response += `<div class="course-details">
+                    <h4>${course.title}</h4>
+                    <p><strong>Price:</strong> €${course.startPrice}</p>
+                    <p><strong>Country:</strong> ${course.country}</p>
+                    <p><strong>Duration:</strong> ${course.duration}</p>
+                    <p><strong>Rating:</strong> ⭐ ${course.rating}/5 (${course.totalReviews} reviews)</p>
+                </div>`;
+            });
+            
+            return response;
+        }
+
+        function generateProviderResponse() {
+            const providers = [...new Set(coursesData.map(c => c.provider?.name).filter(Boolean))];
+            
+            let response = '<strong>Course Providers:</strong><br><br>';
+            providers.forEach(provider => {
+                const providerCourses = coursesData.filter(c => c.provider?.name === provider);
+                response += `<div class="course-details">
+                    <h4>${provider}</h4>
+                    <p><strong>Courses:</strong> ${providerCourses.length}</p>
+                    <p><strong>Description:</strong> ${providerCourses[0].provider.description}</p>
+                </div>`;
+            });
+            
+            return response;
+        }
+
+        function generateSpecificCourseResponse(query) {
+            let category = '';
+            if (query.includes('cv')) category = 'CV';
+            else if (query.includes('interview')) category = 'Interview';
+            else if (query.includes('medical')) category = 'Medical';
+            else if (query.includes('corporate')) category = 'Corporate';
+            else if (query.includes('it')) category = 'IT';
+            else if (query.includes('language')) category = 'Language';
+            
+            if (category) {
+                return generateCategoryResponse(category);
+            }
+            
+            return generateDefaultResponse();
+        }
+
+        function generateDefaultResponse() {
+            return `I can help you with:<br><br>
+            • <strong>Course information:</strong> Ask about specific courses, categories, or countries<br>
+            • <strong>Pricing:</strong> Find affordable or premium courses<br>
+            • <strong>Recommendations:</strong> Get personalized course suggestions<br>
+            • <strong>Provider details:</strong> Learn about course providers<br><br>
+            Try asking: "What CV courses do you have?" or "Show me courses in Germany"`;
+        }
+
+        function extractCountry(query) {
+            const countries = ['germany', 'france', 'italy', 'netherlands', 'spain', 'belgium', 'sweden', 'austria', 'portugal', 'ireland', 'denmark', 'finland', 'poland', 'greece', 'czech republic', 'hungary', 'romania', 'bulgaria'];
+            
+            for (const country of countries) {
+                if (query.includes(country)) {
+                    return country;
+                }
+            }
+            return null;
+        }
+
+        function extractCategory(query) {
+            const categories = ['cv', 'interview', 'medical', 'corporate', 'it', 'language'];
+            
+            for (const category of categories) {
+                if (query.includes(category)) {
+                    return category;
+                }
+            }
+            return null;
+        }
+
+        function askAI(question) {
+            aiChatInput.value = question;
+            sendAIMessage();
+        }
+
+        // Course rendering functions
+        async function fetchCourses() {
+            // Return the embedded course data directly
+            return [
+                {
+                    "title": "Die Bewerbungsschreiber",
+                    "description": "Professional application writing service with ATS-optimized deliverables.",
+                    "description2": "German provider producing tailored CVs, cover letters, and full application documents for the DACH market; transparent per-item pricing and fast delivery.",
+                    "country": "Germany",
+                    "category": "CV",
+                    "startPrice": 89,
+                    "priceTier": "low",
+                    "duration": "1-2 weeks",
+                    "format": "Online",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=CV+Service",
+                    "pageLink": "#",
+                    "webpage": "https://www.die-bewerbungsschreiber.de/",
+                    "rating": 4.6,
+                    "totalReviews": 18,
+                    "services": [
+                        "CV writing",
+                        "Cover letter",
+                        "Complete application package",
+                        "LinkedIn optimization"
+                    ],
+                    "subTabs": [
+                        "CV Writing",
+                        "Cover Letters",
+                        "Application Package",
+                        "LinkedIn"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Best Value",
+                            "icon": "💎",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Die Bewerbungsschreiber",
+                        "description": "Professional application writing service with ATS-optimized deliverables for the German market."
+                    }
+                },
+                {
+                    "title": "CV People Ireland",
+                    "description": "Irish CV-writing and career documents provider.",
+                    "description2": "Packages for different career stages with optional add-ons like cover letters and LinkedIn optimization; online delivery and revisions included.",
+                    "country": "Ireland",
+                    "category": "CV",
+                    "startPrice": 179,
+                    "priceTier": "mid",
+                    "duration": "1-2 weeks",
+                    "format": "Online",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=CV+People",
+                    "pageLink": "#",
+                    "webpage": "https://www.cvpeople.ie/shop/",
+                    "rating": 4.7,
+                    "totalReviews": 25,
+                    "services": [
+                        "Graduate CV",
+                        "Professional CV",
+                        "Executive CV",
+                        "Cover Letter",
+                        "LinkedIn Profile",
+                        "Interview Coaching"
+                    ],
+                    "subTabs": [
+                        "Graduate CV",
+                        "Professional CV",
+                        "Executive CV",
+                        "Cover Letters"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Premium",
+                            "icon": "⭐",
+                            "color": "#ffd700"
+                        }
+                    ],
+                    "provider": {
+                        "name": "CV People Ireland",
+                        "description": "Irish CV-writing and career documents provider with packages for different career stages."
+                    }
+                },
+                {
+                    "title": "Karrierecoach München",
+                    "description": "Munich-based interview and career coaching.",
+                    "description2": "One-to-one interview preparation and broader career coaching with transparent hourly pricing and package options.",
+                    "country": "Germany",
+                    "category": "Interview",
+                    "startPrice": 70,
+                    "priceTier": "mid",
+                    "duration": "1-2 hours",
+                    "format": "Hybrid",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Karrierecoach",
+                    "pageLink": "#",
+                    "webpage": "https://karrierecoach-muenchen.de/leistungsuebersicht/leistungen/preise/",
+                    "rating": 4.8,
+                    "totalReviews": 32,
+                    "services": [
+                        "Interview coaching",
+                        "Career coaching",
+                        "Application check"
+                    ],
+                    "subTabs": [
+                        "Interview Prep",
+                        "Career Coaching",
+                        "Application Review"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Local Expert",
+                            "icon": "🏢",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Karrierecoach München",
+                        "description": "Munich-based interview and career coaching with transparent hourly pricing."
+                    }
+                },
+                {
+                    "title": "Bewerbungshilfe",
+                    "description": "Budget-friendly German application writing help.",
+                    "description2": "Creates CVs, cover letters, and full application sets tailored to German employers; pricing scales by package.",
+                    "country": "Germany",
+                    "category": "CV",
+                    "startPrice": 19,
+                    "priceTier": "low",
+                    "duration": "1 week",
+                    "format": "Online",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Bewerbungshilfe",
+                    "pageLink": "#",
+                    "webpage": "https://www.bewerbung-hilfe.de/preise",
+                    "rating": 4.3,
+                    "totalReviews": 41,
+                    "services": [
+                        "CV writing",
+                        "Cover letter",
+                        "Complete application set"
+                    ],
+                    "subTabs": [
+                        "CV Writing",
+                        "Cover Letters",
+                        "Application Sets"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Budget",
+                            "icon": "💰",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Bewerbungshilfe",
+                        "description": "Budget-friendly German application writing help with scalable pricing."
+                    }
+                },
+                {
+                    "title": "AIP Akademie - Kenntnisprüfung Prep",
+                    "description": "Online prep for German medical knowledge exam (Ärzte).",
+                    "description2": "Structured e-learning and support to prepare foreign-trained physicians for the German Kenntnisprüfung required for licensure.",
+                    "country": "Germany",
+                    "category": "Medical",
+                    "startPrice": 3999,
+                    "priceTier": "high",
+                    "duration": "3-6 months",
+                    "format": "Online",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=AIP+Akademie",
+                    "pageLink": "#",
+                    "webpage": "https://www.aip-akademie.de/shop/teilstudium/aei_der_kenntnispruefung_arzt-prep/",
+                    "rating": 4.9,
+                    "totalReviews": 12,
+                    "services": [
+                        "Kenntnisprüfung preparation",
+                        "Online modules",
+                        "Practice exams",
+                        "Support materials"
+                    ],
+                    "subTabs": [
+                        "Online Prep",
+                        "Practice Exams",
+                        "Support Materials"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Certified",
+                            "icon": "🏥",
+                            "color": "#007bff"
+                        }
+                    ],
+                    "provider": {
+                        "name": "AIP Akademie",
+                        "description": "Online preparation for German medical knowledge exam (Kenntnisprüfung) for physicians."
+                    }
+                },
+                {
+                    "title": "TOGU Akademie - Kenntnisprüfung Prep",
+                    "description": "Intensive course for doctors seeking German licensure.",
+                    "description2": "Full preparation program including exam-oriented modules and supervised practice to pass the Kenntnisprüfung for doctors in Germany.",
+                    "country": "Germany",
+                    "category": "Medical",
+                    "startPrice": 5999,
+                    "priceTier": "high",
+                    "duration": "6+ months",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=TOGU+Akademie",
+                    "pageLink": "#",
+                    "webpage": "https://togu-akademie.de/programm/kursdetail/11518-aerzteen/",
+                    "rating": 4.8,
+                    "totalReviews": 12,
+                    "services": [
+                        "Kenntnisprüfung preparation",
+                        "In-person training",
+                        "Supervised practice",
+                        "Exam orientation"
+                    ],
+                    "subTabs": [
+                        "In-Person Training",
+                        "Supervised Practice",
+                        "Exam Prep"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Premium",
+                            "icon": "⭐",
+                            "color": "#ffd700"
+                        }
+                    ],
+                    "provider": {
+                        "name": "TOGU Akademie",
+                        "description": "Intensive in-person preparation for German medical knowledge exam."
+                    }
+                },
+                {
+                    "title": "EZplus - Nursing Kenntnisprüfung",
+                    "description": "Nursing knowledge exam prep course.",
+                    "description2": "Prepares foreign-trained nurses for the German Kenntnisprüfung in nursing with focused theory review and practice tasks.",
+                    "country": "Germany",
+                    "category": "Medical",
+                    "startPrice": 1960,
+                    "priceTier": "mid",
+                    "duration": "3-4 months",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=EZplus",
+                    "pageLink": "#",
+                    "webpage": "https://www.ezplus.de/kenntnispruefung-pflege",
+                    "rating": 4.6,
+                    "totalReviews": 19,
+                    "services": [
+                        "Nursing Kenntnisprüfung prep",
+                        "Theory review",
+                        "Practice tasks",
+                        "Exam preparation"
+                    ],
+                    "subTabs": [
+                        "Theory Review",
+                        "Practice Tasks",
+                        "Exam Prep"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Specialized",
+                            "icon": "👩‍⚕️",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "EZplus",
+                        "description": "Nursing knowledge exam preparation for foreign-trained nurses in Germany."
+                    }
+                },
+                {
+                    "title": "INSTAG - Nursing Practical Prep",
+                    "description": "Hands-on prep for nursing practical exam.",
+                    "description2": "Focuses on clinical skills and scenarios to pass the practical component of the nursing recognition exam in Germany.",
+                    "country": "Germany",
+                    "category": "Medical",
+                    "startPrice": 1490,
+                    "priceTier": "mid",
+                    "duration": "2-3 months",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=INSTAG",
+                    "pageLink": "#",
+                    "webpage": "https://instag.de/praktische-vorbereitung-kenntnispruefung-krankenpflege",
+                    "rating": 4.7,
+                    "totalReviews": 15,
+                    "services": [
+                        "Practical preparation",
+                        "Clinical skills",
+                        "Scenario training",
+                        "Hands-on practice"
+                    ],
+                    "subTabs": [
+                        "Clinical Skills",
+                        "Scenario Training",
+                        "Hands-on Practice"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Practical",
+                            "icon": "🩺",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "INSTAG gGmbH",
+                        "description": "Practical preparation for nursing recognition exams with focus on clinical skills."
+                    }
+                },
+                {
+                    "title": "Latorps Healthcare - Nursing Prep",
+                    "description": "Nursing recognition exam prep.",
+                    "description2": "Provides preparatory courses and materials for nursing recognition exams, including sample fees published on their pricing page.",
+                    "country": "Germany",
+                    "category": "Medical",
+                    "startPrice": 1799,
+                    "priceTier": "mid",
+                    "duration": "3-4 months",
+                    "format": "Hybrid",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Latorps",
+                    "pageLink": "#",
+                    "webpage": "https://www.latorps-healthcare.de/preise",
+                    "rating": 4.5,
+                    "totalReviews": 22,
+                    "services": [
+                        "Nursing recognition prep",
+                        "Course materials",
+                        "Online support",
+                        "Practice resources"
+                    ],
+                    "subTabs": [
+                        "Course Materials",
+                        "Online Support",
+                        "Practice Resources"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Hybrid",
+                            "icon": "💻",
+                            "color": "#6c757d"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Latorps Healthcare",
+                        "description": "Nursing recognition exam preparation with hybrid delivery format."
+                    }
+                },
+                {
+                    "title": "MHZ - Nursing Kenntnisprüfung Prep",
+                    "description": "Nursing Kenntnisprüfung prep course.",
+                    "description2": "Guided preparation course to help foreign nurses pass the German knowledge exam; published flat fee price.",
+                    "country": "Germany",
+                    "category": "Medical",
+                    "startPrice": 1690,
+                    "priceTier": "mid",
+                    "duration": "3-4 months",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=MHZ",
+                    "pageLink": "#",
+                    "webpage": "https://mhz-gesundheitsakademie.de/kurse/vorbereitung-kenntnispruefung-wir-gebrauchsanweisung",
+                    "rating": 4.4,
+                    "totalReviews": 28,
+                    "services": [
+                        "Kenntnisprüfung prep",
+                        "Guided preparation",
+                        "Flat fee pricing",
+                        "Support materials"
+                    ],
+                    "subTabs": [
+                        "Guided Prep",
+                        "Flat Fee",
+                        "Support Materials"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Transparent",
+                            "icon": "📋",
+                            "color": "#17a2b8"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Medizinisches Aus- und Fortbildungszentrum",
+                        "description": "Guided preparation for nursing Kenntnisprüfung with transparent flat fee pricing."
+                    }
+                },
+                {
+                    "title": "Alliance Française - Intensive French (Morning)",
+                    "description": "2-week intensive morning French course.",
+                    "description2": "Monthly intensive sessions (around 72h total per session); example event lists €740 for a two-week intensive morning block at AF Paris.",
+                    "country": "France",
+                    "category": "Language",
+                    "startPrice": 740,
+                    "priceTier": "mid",
+                    "duration": "2 weeks",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Alliance+Française",
+                    "pageLink": "#",
+                    "webpage": "https://www.alliancefr.org/event/in-person-intensive-french-class-morning-a2-to-c1-07-15-2025-07-25-2025-3025",
+                    "rating": 4.8,
+                    "totalReviews": 156,
+                    "services": [
+                        "Intensive French (A2–C1)",
+                        "Morning classes (9:00–13:00)",
+                        "2-week sessions",
+                        "Monthly availability"
+                    ],
+                    "subTabs": [
+                        "Intensive French",
+                        "Morning Classes",
+                        "2-Week Sessions"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Intensive",
+                            "icon": "⚡",
+                            "color": "#ff6b35"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Alliance Française de Paris",
+                        "description": "Intensive French language courses with morning sessions and monthly availability."
+                    }
+                },
+                {
+                    "title": "Alliance Française - Monthly Intensive",
+                    "description": "4-week intensive French at AF Paris.",
+                    "description2": "Event page shows a full monthly intensive session priced at €1,400 for 09:00–13:00 classes over four weeks.",
+                    "country": "France",
+                    "category": "Language",
+                    "startPrice": 1400,
+                    "priceTier": "mid",
+                    "duration": "4 weeks",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=AF+Monthly",
+                    "pageLink": "#",
+                    "webpage": "https://www.alliancefr.org/event/cours-intensif-de-francais-en-presentiel-matin-a1-a-c1-29-09-2025-24-10-2025-3039",
+                    "rating": 4.7,
+                    "totalReviews": 89,
+                    "services": [
+                        "Intensive French (A1–C1)",
+                        "Monthly sessions",
+                        "Morning classes",
+                        "4-week programs"
+                    ],
+                    "subTabs": [
+                        "Monthly Sessions",
+                        "Morning Classes",
+                        "4-Week Programs"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Monthly",
+                            "icon": "📅",
+                            "color": "#6c757d"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Alliance Française de Paris",
+                        "description": "Monthly intensive French language sessions with morning classes over four weeks."
+                    }
+                },
+                {
+                    "title": "EC English Dublin - General English",
+                    "description": "Accredited English school in Dublin.",
+                    "description2": "Offers several programmes with weekly pricing; official page lists example weekly price for General English and outlines formats.",
+                    "country": "Ireland",
+                    "category": "Language",
+                    "startPrice": 360,
+                    "priceTier": "mid",
+                    "duration": "1 week",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=EC+English",
+                    "pageLink": "#",
+                    "webpage": "https://ecenglish.com/en/schools/ireland/learn-english-in-dublin/",
+                    "webpage": "https://ecenglish.com/en/schools/ireland/learn-english-in-dublin/",
+                    "rating": 4.6,
+                    "totalReviews": 234,
+                    "services": [
+                        "General English 20 lessons/week",
+                        "English for Work 30 lessons/week",
+                        "Weekly pricing",
+                        "Accredited programs"
+                    ],
+                    "subTabs": [
+                        "General English",
+                        "English for Work",
+                        "Weekly Pricing"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Accredited",
+                            "icon": "📜",
+                            "color": "#17a2b8"
+                        }
+                    ],
+                    "provider": {
+                        "name": "EC English Dublin",
+                        "description": "Accredited English language school in Dublin with weekly pricing options."
+                    }
+                },
+                {
+                    "title": "Scuola Leonardo da Vinci - Super Intensive Italian",
+                    "description": "Italian super-intensive course with transparent pricing.",
+                    "description2": "Multiple durations with published prices; starts any Monday for non-beginners; max 14 students per class.",
+                    "country": "Italy",
+                    "category": "Language",
+                    "startPrice": 400,
+                    "priceTier": "mid",
+                    "duration": "1 week",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Scuola+Leonardo",
+                    "pageLink": "#",
+                    "webpage": "https://www.scuolaleonardo.com/it/prezzi/prezzi-del-corso-superintensivo-di-italiano.html",
+                    "rating": 4.8,
+                    "totalReviews": 178,
+                    "services": [
+                        "Super Intensive Italian (30 lessons/week)",
+                        "Multiple durations",
+                        "Transparent pricing",
+                        "Small class sizes"
+                    ],
+                    "subTabs": [
+                        "Super Intensive",
+                        "Multiple Durations",
+                        "Small Classes"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Popular",
+                            "icon": "🔥",
+                            "color": "#ff6b35"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Scuola Leonardo da Vinci",
+                        "description": "Super intensive Italian language courses with transparent pricing and small class sizes."
+                    }
+                },
+                {
+                    "title": "Scuola Leonardo da Vinci - Intensive Italian",
+                    "description": "Intensive Italian course options with add-on one-to-one lessons.",
+                    "description2": "Transparent tiered pricing for 1-week offerings; super-intensive and longer durations also available on site.",
+                    "country": "Italy",
+                    "category": "Language",
+                    "startPrice": 250,
+                    "priceTier": "low",
+                    "duration": "1 week",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Scuola+Intensive",
+                    "pageLink": "#",
+                    "webpage": "https://www.scuolaleonardo.com/prices/prices-for-the-1-week-intensive-italian-language-courses.html",
+                    "rating": 4.7,
+                    "totalReviews": 145,
+                    "services": [
+                        "Intensive Italian (20 lessons/week)",
+                        "Intensive+5",
+                        "Intensive+10",
+                        "Add-on lessons"
+                    ],
+                    "subTabs": [
+                        "Intensive Italian",
+                        "Add-on Lessons",
+                        "Tiered Pricing"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Flexible",
+                            "icon": "🔄",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Scuola Leonardo da Vinci",
+                        "description": "Intensive Italian courses with flexible add-on options and tiered pricing."
+                    }
+                },
+                {
+                    "title": "Berlin VHS - Integrationskurs",
+                    "description": "Public integration German course in Berlin.",
+                    "description2": "Berlin Volkshochschule lists costs for integration and literacy courses; eligible learners may receive funding via BAMF.",
+                    "country": "Germany",
+                    "category": "Language",
+                    "startPrice": 235,
+                    "priceTier": "low",
+                    "duration": "1 module",
+                    "format": "In-Person",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Berlin+VHS",
+                    "pageLink": "#",
+                    "webpage": "https://www.berlin.de/vhs/kurse/deutsch-integration/deutsch-und-integrationsangebote/",
+                    "rating": 4.5,
+                    "totalReviews": 312,
+                    "services": [
+                        "Integrationskurs with literacy modules",
+                        "A0–B1 + orientation",
+                        "BAMF funding eligible",
+                        "Public institution"
+                    ],
+                    "subTabs": [
+                        "Integration Course",
+                        "Literacy Modules",
+                        "BAMF Funding"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Public",
+                            "icon": "🏛️",
+                            "color": "#6c757d"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Berlin Volkshochschule",
+                        "description": "Public integration German courses with potential BAMF funding for eligible learners."
+                    }
+                },
+                {
+                    "title": "MooiCV - Custom CV Writing",
+                    "description": "Dutch professional CV/letter/LinkedIn writing service.",
+                    "description2": "Offers standalone and bundle packages for Dutch and English CVs, cover letters, and LinkedIn profiles with published EUR pricing.",
+                    "country": "Netherlands",
+                    "category": "CV",
+                    "startPrice": 397,
+                    "priceTier": "mid",
+                    "duration": "1-2 weeks",
+                    "format": "Online",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=MooiCV",
+                    "pageLink": "#",
+                    "webpage": "https://mooicv.nl/tarieven/",
+                    "rating": 4.8,
+                    "totalReviews": 67,
+                    "services": [
+                        "Custom CV writing",
+                        "Cover letter",
+                        "LinkedIn optimization",
+                        "Bundles"
+                    ],
+                    "subTabs": [
+                        "Custom CV",
+                        "Cover Letters",
+                        "LinkedIn",
+                        "Bundles"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Professional",
+                            "icon": "💼",
+                            "color": "#007bff"
+                        }
+                    ],
+                    "provider": {
+                        "name": "MooiCV",
+                        "description": "Dutch professional CV writing service with standalone and bundle packages."
+                    }
+                },
+                {
+                    "title": "Veenstra Schrijfhulp",
+                    "description": "Affordable application letter writing and mock interviews.",
+                    "description2": "Freelance Dutch service providing tailored letters and interview preparation with clear per-item pricing.",
+                    "country": "Netherlands",
+                    "category": "CV",
+                    "startPrice": 85,
+                    "priceTier": "low",
+                    "duration": "1 week",
+                    "format": "Hybrid",
+                    "logoURL": "https://via.placeholder.com/150x100/1f2937/ffffff?text=Veenstra",
+                    "pageLink": "#",
+                    "webpage": "https://veenstraschrijfhulp.nl/diensten-prijzen/",
+                    "rating": 4.4,
+                    "totalReviews": 38,
+                    "services": [
+                        "Motivation/cover letter writing",
+                        "Interview practice sessions",
+                        "Affordable pricing",
+                        "Freelance service"
+                    ],
+                    "subTabs": [
+                        "Cover Letters",
+                        "Interview Practice",
+                        "Affordable Pricing"
+                    ],
+                    "badges": [
+                        {
+                            "text": "Budget",
+                            "icon": "💰",
+                            "color": "#28a745"
+                        }
+                    ],
+                    "provider": {
+                        "name": "Veenstra Schrijfhulp",
+                        "description": "Affordable Dutch application letter writing and interview preparation service."
+                    }
+                }
+            ];
+        }
+
+        function renderCourses(coursesData) {
+            courseGrid.innerHTML = '';
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedCountry = countryFilter.value;
+            const selectedCategory = categoryFilter.value;
+            const selectedPrice = priceFilter.value;
+            const selectedDuration = durationFilter.value;
+            const selectedFormat = formatFilter.value;
+            const selectedRating = ratingFilter.value;
+            const selectedSort = sortFilter.value;
+
+            // Filter courses
+            let filteredCourses = coursesData.filter(course => {
+                const matchesSearch = course.title.toLowerCase().includes(searchTerm) || 
+                                   course.description.toLowerCase().includes(searchTerm);
+                const matchesCountry = !selectedCountry || course.country === selectedCountry;
+                const matchesCategory = !selectedCategory || course.category === selectedCategory;
+                const matchesPrice = !selectedPrice || course.priceTier === selectedPrice;
+                const matchesDuration = !selectedDuration || course.duration === selectedDuration;
+                const matchesFormat = !selectedFormat || course.format === selectedFormat;
+                const matchesRating = !selectedRating || course.rating >= parseFloat(selectedRating);
+
+                return matchesSearch && matchesCountry && matchesCategory && matchesPrice && matchesDuration && matchesFormat && matchesRating;
+            });
+
+            // Sort courses
+            if (selectedSort) {
+                filteredCourses.sort((a, b) => {
+                    switch (selectedSort) {
+                        case 'price-low':
+                            return a.startPrice - b.startPrice;
+                        case 'price-high':
+                            return b.startPrice - a.startPrice;
+                        case 'rating':
+                            return b.rating - a.rating;
+                        case 'reviews':
+                            return b.totalReviews - a.totalReviews;
+                        default:
+                            return 0;
+                    }
+                });
+            }
+
+            filteredCourses.forEach(course => {
+                    const subTabsHtml = Array.isArray(course.subTabs) ? course.subTabs.map(sub => `<li>${sub}</li>`).join('') : '';
+                    const badgesHtml = Array.isArray(course.badges) ? course.badges.map(badge => 
+                        `<span class="badge" style="background-color: ${badge.color}">${badge.icon} ${badge.text}</span>`
+                    ).join('') : '';
+
+                    const courseCard = document.createElement('div');
+                    courseCard.className = 'course-card cursor-pointer';
+                    courseCard.setAttribute('data-country', course.country);
+                    courseCard.setAttribute('data-category', course.category);
+                    courseCard.setAttribute('data-price', course.priceTier);
+                    courseCard.setAttribute('data-course', JSON.stringify(course));
+                    courseCard.innerHTML = `
+                        <img src="${course.logoURL}" alt="${course.title}">
+                        <h2>${course.title}</h2>
+                        <p>${course.description}</p>
+                        <div class="price-info">Starting from €${course.startPrice}</div>
+                        <div class="sub-tabs">
+                            <ul>${subTabsHtml}</ul>
+                        </div>
+                        ${badgesHtml ? `<div class="badges">${badgesHtml}</div>` : ''}
+                    `;
+                    
+                    // Add click event to open modal
+                    courseCard.addEventListener('click', () => openCourseModal(course));
+                    courseGrid.appendChild(courseCard);
+                }
+            });
+        }
+
+        function openCourseModal(course) {
+            const modal = document.createElement('div');
+            modal.className = 'course-modal-overlay';
+            modal.id = 'courseModal';
+            
+            const subTabsHtml = Array.isArray(course.subTabs) ? course.subTabs.map(sub => `<li>${sub}</li>`).join('') : '';
+            const badgesHtml = Array.isArray(course.badges) ? course.badges.map(badge => 
+                `<span class="badge" style="background-color: ${badge.color}">${badge.icon} ${badge.text}</span>`
+            ).join('') : '';
+            const servicesHtml = Array.isArray(course.services) ? course.services.map(service => `<li>${service}</li>`).join('') : '';
+
+            modal.innerHTML = `
+                <div class="course-modal-content">
+                    <div class="course-modal-body">
+                        <div class="course-modal-header">
+                            <h2 class="course-modal-title">${course.title}</h2>
+                            <button onclick="closeCourseModal()" class="course-modal-close">&times;</button>
+                        </div>
+                        
+                        <div class="course-modal-image-section">
+                            <img src="${course.logoURL}" alt="${course.title}" class="course-modal-image">
+                            ${badgesHtml ? `<div class="course-modal-badges">${badgesHtml}</div>` : ''}
+                        </div>
+
+                        <div class="course-modal-details">
+                            <div class="course-detail-item"><strong>Country:</strong> ${course.country}</div>
+                            <div class="course-detail-item"><strong>Category:</strong> ${course.category}</div>
+                            <div class="course-detail-item"><strong>Price:</strong> Starting from €${course.startPrice}</div>
+                            <div class="course-detail-item"><strong>Duration:</strong> ${course.duration}</div>
+                            <div class="course-detail-item"><strong>Format:</strong> ${course.format}</div>
+                            <div class="course-detail-item"><strong>Rating:</strong> ⭐ ${course.rating}/5 (${course.totalReviews} reviews)</div>
+                        </div>
+
+                        <div class="course-modal-section">
+                            <h3 class="course-modal-section-title">Description</h3>
+                            <p class="course-modal-text">${course.description2}</p>
+                        </div>
+
+                        ${course.provider ? `
+                        <div class="course-modal-section">
+                            <h3 class="course-modal-section-title">Provider</h3>
+                            <p class="course-modal-text"><strong>${course.provider.name}</strong></p>
+                            <p class="course-modal-text-small">${course.provider.description}</p>
+                        </div>
+                        ` : ''}
+
+                        ${servicesHtml ? `
+                        <div class="course-modal-section">
+                            <h3 class="course-modal-section-title">Services</h3>
+                            <ul class="course-modal-list">${servicesHtml}</ul>
+                        </div>
+                        ` : ''}
+
+                        ${subTabsHtml ? `
+                        <div class="course-modal-section">
+                            <h3 class="course-modal-section-title">Course Modules</h3>
+                            <ul class="course-modal-list">${subTabsHtml}</ul>
+                        </div>
+                        ` : ''}
+
+                        <div class="course-modal-actions">
+                            <a href="${course.webpage}" target="_blank" class="course-modal-button-primary">
+                                Visit the provider's website
+                            </a>
+                            <button onclick="closeCourseModal()" class="course-modal-button-secondary">
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        function closeCourseModal() {
+            const modal = document.getElementById('courseModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        async function initialize() {
+            coursesData = await fetchCourses();
+            renderCourses(coursesData);
+
+            searchInput.addEventListener('input', () => renderCourses(coursesData));
+            countryFilter.addEventListener('change', () => renderCourses(coursesData));
+            categoryFilter.addEventListener('change', () => renderCourses(coursesData));
+            priceFilter.addEventListener('change', () => renderCourses(coursesData));
+            durationFilter.addEventListener('change', () => renderCourses(coursesData));
+            formatFilter.addEventListener('change', () => renderCourses(coursesData));
+            ratingFilter.addEventListener('change', () => renderCourses(coursesData));
+            sortFilter.addEventListener('change', () => renderCourses(coursesData));
+        }
+
+        // Initialize the application
+        initialize();
+    </script>
+</body>
+</html>
