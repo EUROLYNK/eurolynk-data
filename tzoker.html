@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lemnos Tzoker — Tickets</title>
+    <style>
+      body{font-family:Inter,system-ui,Arial;background:#0b1220;color:#e6eef8;margin:0;padding:20px}
+      .container{max-width:980px;margin:0 auto}
+      .card{background:#0f1724;padding:18px;border-radius:12px;margin:12px 0}
+      h1,h2,h3{margin:6px 0 12px}
+      input,button{padding:8px;border-radius:8px;border:1px solid #1f2937;background:#0b1220;color:#e6eef8}
+      .btn{cursor:pointer}
+      .row{display:flex;gap:10px;flex-wrap:wrap}
+      .status{margin-top:8px;font-weight:600}
+      .status.ok{color:#34d399}
+      .status.err{color:#fb7185}
+      .numbers{display:grid;grid-template-columns:repeat(5, 1fr);gap:8px;margin-top:8px}
+      .num{padding:10px 0;text-align:center;border-radius:8px;border:1px solid #334155;background:#0b1220;user-select:none;cursor:pointer}
+      .num.selected{background:#14532d;border-color:#16a34a}
+      .meta{display:flex;align-items:center;gap:12px;margin-top:10px}
+      .meta .pill{background:#111827;border:1px solid #374151;border-radius:999px;padding:6px 10px}
+      .section-title{margin-top:4px}
+      .admin-list{list-style:none;padding:0;margin:10px 0}
+      .admin-list li{padding:8px;border:1px solid #1f2937;border-radius:8px;margin-bottom:6px;background:#0b1220}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Lemnos Tzoker — Firebase + Firestore</h1>
+        <div class="row">
+          <input id="roblox" placeholder="Roblox username">
+          <input id="discord" placeholder="Discord username">
+          <button id="registerBtn" class="btn">Register</button>
+        </div>
+        <p id="accountInfo"></p>
+      </div>
+
+      <div id="voucherArea" class="card" style="display:none">
+        <h3>Redeem Voucher</h3>
+        <div class="row">
+          <input id="voucherCode" placeholder="Voucher code">
+          <button id="redeemBtn" class="btn">Redeem</button>
+        </div>
+        <div class="meta">
+          <span class="pill" id="credits">Credits: €0</span>
+        </div>
+        <p id="statusMsg" class="status"></p>
+      </div>
+
+      <div id="playArea" class="card" style="display:none">
+        <h2 class="section-title">Pick Numbers (1–20)</h2>
+        <div id="numbers" class="numbers"></div>
+        <div class="meta">
+          <span class="pill" id="selectedCount">Selected: 0</span>
+          <span class="pill" id="price">Price: €0</span>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="buyBtn" class="btn">Buy Ticket</button>
+          <span id="buyStatus" class="status"></span>
+        </div>
+      </div>
+
+      <div id="adminArea" class="card">
+        <h3>Admin Panel</h3>
+        <div id="adminGate">
+          <div class="row">
+            <input id="adminCode" placeholder="Enter admin code">
+            <button id="adminEnter" class="btn">Enter</button>
+          </div>
+          <p id="adminGateMsg" class="status"></p>
+        </div>
+        <div id="adminPanel" style="display:none">
+          <div class="row">
+            <button id="refreshTickets" class="btn">View Tickets</button>
+            <button id="clearTickets" class="btn">Clear All Tickets</button>
+          </div>
+          <ul id="ticketsList" class="admin-list"></ul>
+          <p id="adminStatus" class="status"></p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+      import { getFirestore, doc, getDoc, setDoc, addDoc, getDocs, collection, deleteDoc } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDUAoYHoLjk2Z0KY8abLr0S_1516j4Od5Y",
+        authDomain: "lemnos-tzoker.firebaseapp.com",
+        projectId: "lemnos-tzoker",
+        appId: "1:659701848874:web:dcfadfbc516f816e265c53",
+        measurementId: "G-J4W83FFGK0"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      let account = null;
+      let credits = 0;
+      let selectedNumbers = new Set();
+
+      function setBusy(el, busy) {
+        el.disabled = busy;
+        el.style.opacity = busy ? "0.6" : "1";
+        el.style.pointerEvents = busy ? "none" : "auto";
+      }
+
+      function calcPrice(count){
+        if(count <= 0) return 0;
+        if(count === 3) return 200;
+        if(count === 4) return 250;
+        if(count >= 5) return 250 + 10000 * (count - 4);
+        return 0;
+      }
+
+      function updatePriceUI(){
+        const count = selectedNumbers.size;
+        document.getElementById('selectedCount').textContent = `Selected: ${count}`;
+        document.getElementById('price').textContent = `Price: €${calcPrice(count)}`;
+      }
+
+      function renderNumberGrid(){
+        const container = document.getElementById('numbers');
+        container.innerHTML = '';
+        for(let i=1;i<=20;i++){
+          const b = document.createElement('div');
+          b.className = 'num';
+          b.textContent = String(i);
+          b.dataset.n = String(i);
+          b.addEventListener('click', ()=>{
+            const n = Number(b.dataset.n);
+            if(selectedNumbers.has(n)) selectedNumbers.delete(n); else selectedNumbers.add(n);
+            b.classList.toggle('selected');
+            updatePriceUI();
+          });
+          container.appendChild(b);
+        }
+      }
+
+      async function registerAccount(){
+        const r = document.getElementById('roblox').value.trim();
+        const d = document.getElementById('discord').value.trim();
+        const registerBtn = document.getElementById('registerBtn');
+        if(!r || !d){ alert('Fill Roblox and Discord'); return; }
+        const id = `${r}_${d}`;
+        const accountRef = doc(db, 'account', id);
+        try {
+          setBusy(registerBtn, true);
+          const docSnap = await getDoc(accountRef);
+          if(!docSnap.exists()){
+            await setDoc(accountRef, { roblox: r, discord: d, credits: 0 }, { merge: true });
+            credits = 0;
+          } else {
+            credits = Number(docSnap.data().credits ?? 0);
+          }
+          account = { id, roblox: r, discord: d };
+          document.getElementById('accountInfo').textContent = `Registered: ${r} • ${d}`;
+          document.getElementById('voucherArea').style.display = 'block';
+          document.getElementById('playArea').style.display = 'block';
+          document.getElementById('credits').textContent = 'Credits: €'+credits;
+        } catch(err){
+          console.error('Firebase error:', err);
+          alert('Error registering account. Check Firestore setup and rules.');
+        } finally {
+          setBusy(registerBtn, false);
+        }
+      }
+
+      async function redeemVoucher(){
+        const redeemBtn = document.getElementById('redeemBtn');
+        const statusEl = document.getElementById('statusMsg');
+        if(!account){ statusEl.textContent='❌ Register first'; statusEl.className='status err'; return; }
+        const code = document.getElementById('voucherCode').value.trim().toUpperCase();
+        let amount = 0;
+        if(code==='MILLIONAIRE' || code==='232425') amount = 1000000;
+        if(amount<=0){
+          statusEl.textContent='❌ Invalid voucher';
+          statusEl.className='status err';
+          document.getElementById('voucherCode').value='';
+          return;
+        }
+        try {
+          setBusy(redeemBtn, true);
+          const accountRef = doc(db, 'account', account.id);
+          const snap = await getDoc(accountRef);
+          const currentCredits = Number(snap.exists() ? (snap.data().credits ?? 0) : 0);
+          credits = currentCredits + amount;
+          await setDoc(accountRef, { credits }, { merge: true });
+          document.getElementById('credits').textContent = 'Credits: €'+credits;
+          statusEl.textContent = `✅ Voucher ${code} redeemed — added €${amount}`;
+          statusEl.className='status ok';
+        } catch(err){
+          console.error('Firebase error:', err);
+          statusEl.textContent='❌ Error updating credits. Check Firestore database and rules.';
+          statusEl.className='status err';
+        } finally {
+          document.getElementById('voucherCode').value='';
+          setBusy(redeemBtn, false);
+        }
+      }
+
+      async function buyTicket(){
+        const buyBtn = document.getElementById('buyBtn');
+        const buyStatus = document.getElementById('buyStatus');
+        if(!account){ buyStatus.textContent='❌ Register first'; buyStatus.className='status err'; return; }
+        const numbers = Array.from(selectedNumbers).sort((a,b)=>a-b);
+        if(numbers.length < 3){ buyStatus.textContent='❌ Pick at least 3 numbers'; buyStatus.className='status err'; return; }
+        const price = calcPrice(numbers.length);
+        if(price <= 0){ buyStatus.textContent='❌ Invalid selection'; buyStatus.className='status err'; return; }
+        try {
+          setBusy(buyBtn, true);
+          // Check latest credits
+          const accountRef = doc(db, 'account', account.id);
+          const snap = await getDoc(accountRef);
+          const currentCredits = Number(snap.exists() ? (snap.data().credits ?? 0) : 0);
+          if(currentCredits < price){
+            buyStatus.textContent = '❌ Insufficient credits';
+            buyStatus.className='status err';
+            return;
+          }
+          const newCredits = currentCredits - price;
+          await setDoc(accountRef, { credits: newCredits }, { merge: true });
+          credits = newCredits;
+          document.getElementById('credits').textContent = 'Credits: €'+credits;
+          // Save ticket
+          await addDoc(collection(db, 'tickets'), {
+            roblox: account.roblox,
+            discord: account.discord,
+            numbers,
+            purchasedAt: Date.now(),
+            price
+          });
+          buyStatus.textContent = '✅ Ticket purchased!';
+          buyStatus.className='status ok';
+        } catch(err){
+          console.error('Firebase error:', err);
+          buyStatus.textContent='❌ Error buying ticket. Check Firestore.';
+          buyStatus.className='status err';
+        } finally {
+          setBusy(buyBtn, false);
+        }
+      }
+
+      async function adminListTickets(){
+        const list = document.getElementById('ticketsList');
+        const status = document.getElementById('adminStatus');
+        list.innerHTML='';
+        status.textContent='';
+        try {
+          const snap = await getDocs(collection(db, 'tickets'));
+          if(snap.empty){
+            status.textContent='No tickets found';
+            status.className='status';
+            return;
+          }
+          snap.forEach(d => {
+            const t = d.data();
+            const li = document.createElement('li');
+            li.textContent = `Roblox: ${t.roblox} | Discord: ${t.discord} | Numbers: ${Array.isArray(t.numbers)?t.numbers.join(', '):''}`;
+            list.appendChild(li);
+          });
+        } catch(err){
+          console.error(err);
+          status.textContent='❌ Failed to load tickets';
+          status.className='status err';
+        }
+      }
+
+      async function adminClearTickets(){
+        const list = document.getElementById('ticketsList');
+        const status = document.getElementById('adminStatus');
+        status.textContent='';
+        try {
+          const snap = await getDocs(collection(db, 'tickets'));
+          const deletions = [];
+          snap.forEach(d => {
+            deletions.push(deleteDoc(d.ref));
+          });
+          await Promise.all(deletions);
+          list.innerHTML='';
+          status.textContent='✅ All tickets cleared';
+          status.className='status ok';
+        } catch(err){
+          console.error(err);
+          status.textContent='❌ Failed to clear tickets';
+          status.className='status err';
+        }
+      }
+
+      function gateAdmin(){
+        const code = (document.getElementById('adminCode').value || '').trim();
+        const msg = document.getElementById('adminGateMsg');
+        if(code !== '232425'){
+          msg.textContent = '❌ Invalid admin code';
+          msg.className='status err';
+          return;
+        }
+        msg.textContent='';
+        document.getElementById('adminGate').style.display='none';
+        document.getElementById('adminPanel').style.display='block';
+      }
+
+      // Wire up
+      document.getElementById('registerBtn').addEventListener('click', registerAccount);
+      document.getElementById('redeemBtn').addEventListener('click', redeemVoucher);
+      document.getElementById('buyBtn').addEventListener('click', buyTicket);
+      document.getElementById('adminEnter').addEventListener('click', gateAdmin);
+      document.getElementById('refreshTickets').addEventListener('click', adminListTickets);
+      document.getElementById('clearTickets').addEventListener('click', adminClearTickets);
+
+      // Initialize UI
+      renderNumberGrid();
+      updatePriceUI();
+    </script>
+  </body>
+  </html>
+
